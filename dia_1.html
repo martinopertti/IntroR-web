@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Intro a R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Escuela de Invierno en Métodos 2021 - Martín Opertti" />
+    <meta name="date" content="2022-07-15" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+    <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="estilo.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Intro a R
+## Día 1: Introducción y fundamentos de la programación en R
+### Escuela de Invierno en Métodos 2021 - Martín Opertti
+### July 15, 2022
+
+---
+
+class: inverse, center, middle
+
+
+
+
+# ¿Qué es y qué se puede hacer con R?  
+
+---
+
+## R y R Studio
+
+.pull-left[
+
+- R es un software y un lenguaje de programación gratuito enfocado en el análisis estadístico y la visualización de datos.
+
+- R cuenta con gran potencia y flexibilidad, así como una númerosa -y creciente- comunidad de usuarios tanto académicos como profesionales.
+
+.center[
+&lt;img src="ima/Rlogo.png" width="150px" /&gt;
+]]
+
+.pull-right[
+- R Studio es un entorno de desarrollo integrado (IDE) . O en otras palabras... es una interfaz un poco (bastante) más amigable que usar R directamente.
+
+.center[
+&lt;img src="ima/rstudio.png" width="200px" /&gt;
+]]
+
+---
+
+## ¿Por qué usar R? 
+
+- Es un software libre y gratuito
+--
+
+- Generar nuevas funciones es fácil, por lo que las está en constante desarrollo
+--
+
+- Tiene muchos usuarios de diversas disciplinas lo que genera una comunidad (particularmente mediante foros) que es de gran utilidad para la resolución de problemas de código
+--
+
+- Es uno de los programas más utilizados para técnicas innovadaras en estadística y visualización de datos 
+--
+
+- Trabaja muy bien con otros programas/lenguajes (Excel, Latex, HTML, etc.)
+--
+
+- Es cada vez más usado tanto en el ámbito académico como profesional
+--
+
+---
+class: inverse, center, middle
+
+# ¿Qué se puede hacer con R? 
+
+---
+
+## ¿Qué se puede hacer con R?
+
+- Ingresar datos
+--
+
+- Importar y exportar datos (de Excel, Stata, documento de texto, APIs, etc)
+--
+
+- Manipular datos (recodificación, cambios de estructura)
+--
+
+- Estadística descrpitiva e inferencial
+--
+
+- Visualización de datos (gráficos de alta calidad)
+--
+
+- Técnicas estadísticas y de visualización de datos innovadoras
+--
+
+- Crear tus propias funciones y paquetes
+--
+
+- Escribir artículos y presentaciones integrando código
+--
+
+- Escribir libros
+--
+
+- Webscrapping, trabajar con Big data y machine learning
+--
+
+- Aplicaciones intercativas para visualización de datos (shiny apps)
+--
+
+- Hasta jugar videojuegos!
+
+---
+
+## Algunos ejemplos: visualización de datos
+.center[
+&lt;img src="ima/ima5.png" width="750px" /&gt;
+]
+---
+
+## Algunos ejemplos: visualización de datos
+.center[
+&lt;img src="ima/ima10.png" width="750px" /&gt;
+]
+---
+
+## Algunos ejemplos: visualización de datos
+.center[
+&lt;img src="ima/ima4.png" width="750px" /&gt;
+]
+---
+
+## Algunos ejemplos: visualización de datos
+.center[
+&lt;img src="ima/ima14.png" width="450px" /&gt;
+]
+---
+
+## Algunos ejemplos: visualización de datos
+.center[
+&lt;img src="ima/ani8.gif" width="600px" /&gt;
+]
+---
+
+## Algunos ejemplos: visualización de datos
+.center[
+&lt;img src="ima/ima8.jpg" width="650px" /&gt;
+]
+---
+
+## Algunos ejemplos: Webscrapping (APIs) 
+
+
+.codefontchico[
+
+```r
+tweets_eim &lt;- get_timeline("EscuelaMetodos", n = 2, token=twitter_token)
+tweets_eim &lt;- select(tweets_eim, text, retweet_count, favorite_count)
+```
+]
+
+&lt;table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; text &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; retweet_count &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; favorite_count &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Quedan pocos das! Hasta el 19 de Julio pods inscribirte y participar de la EIM2022.
+
+Te vas a quedar afuera? https://t.co/5SSlXkUBga &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Extendimos el plazo de inscripciones! Hasta el 19 de Julio pods inscribirte a la EIM2022, y tomar diferentes cursos en mtodos: https://t.co/KKo5pALvS6 https://t.co/itynIG4ou6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+---
+
+## Aplicaciones (shiny apps), paquetes y presentaciones
+
+- [Mirador DESCA](https://bancodedatos-fcs.shinyapps.io/Mirador-DESCA-app/) 
+
+- [OPUY](https://github.com/Nicolas-Schmidt/opuy) 
+
+- Esta misma presentación, ver [Xaringan](https://github.com/yihui/xaringan)
+
+- [r4ds](https://r4ds.had.co.nz/)
+
+---
+class: inverse, center, middle
+
+# Aprendizaje
+
+---
+
+## ¿Qué tan difícil es aprender R?
+
+- Al comienzo puede ser más difícil que la sintaxis básica de otros programas, particularmente porque es un lenguaje bastante distinto al resto. Sin embargo, una vez que se logra cierto entendimiento y autonomía, las posibilidades son infinitas.
+
+- Muchas de las dificultades para aprender R se deben a sus principales ventajas: flexibilidad y potencia.
+
+---
+
+## Recursos 
+
+Ningún recurso es en si mismo suficiente para aprender R. Cada análisis de datos es particular en su manera y las soluciones no siempre estarán en el contenido de un curso o libro específico. Hay muchos recursos para aprender R de forma general y para obtener ayuda puntual.
+
+.center[
+&lt;img src="ima/sof.png" width="25%" /&gt;&lt;img src="ima/rblog.png" width="25%" /&gt;&lt;img src="ima/r4ds.jpg" width="25%" /&gt;
+]
+---
+
+## Recursos
+La comunidad de usuarios de R es inmensa y muy abierta. Por esto hay muchísimos recursos para aprender de forma independiente y resolver problemas cuando nos estancamos:
+
+- Libro "R for Data Science". Es muy completo y referencia en la mayoría de los cursos de R, pueden acceder a la versión online [original](https://r4ds.had.co.nz/) y a una [traducción](https://r4ds-en-espaniol.netlify.app/)
+- [Hands On Programming with R](https://rstudio-education.github.io/hopr/basics.html) es otro libro libre muy útil sobre R  
+- [R Bloggers](https://www.r-bloggers.com/) y [rpubs](https://rpubs.com/) publican miles de tutoriales para temas específicos 
+- Existen foros -por ej. [Stack Overflow](https://stackoverflow.com/)- donde responden una infinidad preguntas de programación en R. 
+- [IntRo](https://github.com/Nicolas-Schmidt/IntRo) es un excelente curso de R (con gran contenido teórico) de FCS-UdelaR a cargo de Nicolás Schmidt 
+- [AnalizaR](https://arcruz0.github.io/libroadp/index.html) es un libro sobre análisis de datos en R con énfasis en Ciencia Política 
+
+---
+
+## Ayuda  
+
+.center[
+&lt;img src="ima/r_meme.jpg" width="500px" /&gt;
+]
+
+---
+
+## Ayuda  
+
+- Obtener la ayuda correcta es fundamental al programar en R. Podemos obtener ayuda de todas las funciones que utilizamos con el comando `help()` (ej. `help(mean)`) o `?` (ej. `?mean`)
+
+- Si no podemos solucionar un error con la documentación de las funciones/paquetes muchas veces sirve buscar en un navegador 
+
+- Muchas páginas contienen información relevante para solucionar problemas, entre las que se destaca [stackoverflow](https://stackoverflow.com/questions/tagged/r)
+
+- En caso de no encontrar solución se puede consultar en páginas como stackoverflow mediante un [ejemplo reproducible o reprex](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example)
+
+---
+
+## Ayuda
+
+
+```r
+help(mean)
+```
+
+.center[
+&lt;img src="ima/ima_mean.jpeg" width="1000px" /&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Estructura y objetivos del curso 
+
+---
+
+## Sesiones 
+
+- Día 1: Introducción y fundamentos de la programación en R:
+    -  Ventajas de R y distintas aplicaciones
+    -  Interfaz, obtener ayuda
+    -  Operadores, objetos, funciones y paquetes
+    -  Funciones básicas
+    
+- Día 2: Estadística descriptiva y limpieza de datos
+    -  Marcos de datos (dataframes)
+    -  Estadísticos descriptivos
+    -  Importar y exportar datos desde otros formatos (excel, Stata, etc.)
+    -  Recodificación de variables y tablas descriptivas
+
+---
+
+## Sesiones 
+
+- Día 3: Manipulación de datos
+    -  Manipulación de datos con tidyverse (ordenar, agrupar, filtrar, resumir, etc.)
+    -  Integración de bases de datos
+    -  Cambios de estructura de base de datos
+    
+- Día 4: Visualización de datos
+    -  Análisis exploratorios con gráficos
+    -  Tipos de gráficos y atributos (paletas de colores, anotaciones, etc.)
+    -  Gráficos animados
+
+---
+
+## Documentos para cada sesión
+Cada sesión tendrá los siguientes documentos:
+- Presentación 
+
+- Script ejemplo con el código de lo presentado
+
+- Ejercicios sobre lo aprendido en clase
+
+- Script con una solución para el ejercicio
+
+---
+class: inverse, center, middle
+
+# Primeros pasos
+
+---
+
+## Abrimos R Studio 
+.center[
+&lt;img src="ima/consola_standard_2.png" width="1000px" /&gt;
+]
+---
+
+## Personalizar R Studio (opcional)
+.center[
+&lt;img src="ima/consola_per_2.png" width="1000px" /&gt;
+]
+
+---
+
+## R Studio
+
+- Source (editor): es donde creamos y editamos los scripts, es decir, donde escribimos y almacenamos el código.
+
+- Console (consola): imprime el código que corremos y la mayoría de los resultados. Podemos escribir código directamente aquí 
+también, aunque si queremos guardarlo lo recomendable es hacerlo en el script.
+
+- Environment (ambiente): Muestra todos los objetos que creaste en cada sesión.
+
+- Gráficos (y más): Imprime los gráficos. En el mismo panel figuran otras pestañas como "Help" que sirve para buscar ayuda.
+
+---
+
+## Scripts 
+
+- Es un archivo de texto con el código y anotaciones. 
+
+- Se crea arriba a la izquierda "file/New File/R Script" o `ctrl + shift + n`. 
+
+- Se guarda con `ctrl + s` y es un documento de texto como cualquier otro (word, txt). Esto nos permite reproducir paso a paso todo lo que hicimos durante nuestro análisis.
+
+- Haciendo click luego en el script guardado se inicia R Studio. 
+
+- Para ejecutar una línea de código pueden usar el botón de "Run" arriba a la derecha o -más cómodo- `ctrl + enter`
+     
+---
+
+## Workspace
+- R nos ofrece guardar el ambiente (objetos, funciones, datos, etc.) luego de terminada cada sesión (lo que llama workspace). Si lo guardamos, la próxima vez que abramos ese script, nos encontraremos todo como lo dejamos (existirán los mismos objetos, funciones y datos). 
+
+- Lo recomendado es NO guardar el workspace, y guardar solamente el Script. De esta forma, cuando retomemos nuestro análisis en una nueva sesión de R, podemos correrlo y chequear que efectivamente genere los que querramos.
+
+- Pueden desactivar la pregunta en Tools - Global Options - General - desmarcando la opción "Save workspace into RData" y desmarcando "restore RData into workspace"
+      
+---
+class: inverse, center, middle
+
+# Lenguaje básico de R
+
+---
+
+## Anotaciones
+
+- Es importante ser prolijo y cuidadoso con lo que hacemos
+- Los scripts nos dan la posibilidad de anotar comentarios, lo que es muy útil:
+
+
+```r
+## Esta línea es una anotación. 
+
+## R ignora todo lo que está acá adentro (tiene que empezar con #)
+
+## Podemos escribir nombres de funciones u objetos y R no las va a
+# interpetar
+
+## Usar anotaciones es clave para poder entender qué fue lo que
+# hicimos anteriormente
+```
+
+- De esta forma, podemos comentar que fue lo que hicimos para acordarnos nosotros, y que los demás entiendan
+
+---
+
+## R como calculadora 
+
+Para empezar, R sirve como calculadora. Se pueden realizar operaciones matemáticas, por ejemplo:
+
+.codefont[
+
+```r
+# Operaciones sencillas
+2 + 2  
+```
+
+```
+## [1] 4
+```
+
+```r
+20 - 10
+```
+
+```
+## [1] 10
+```
+
+```r
+10 / 2
+```
+
+```
+## [1] 5
+```
+
+```r
+10 * 10
+```
+
+```
+## [1] 100
+```
+]
+
+---
+
+## Objetos en R
+En muchos programas estadísticos solemos solamente "imprimir" resultados (lo que llamamos expresiones). En R podemos utilizar este enfoque:
+
+
+```r
+# Una operación sencilla:
+43*47 # Se imprime el resultado
+```
+
+```
+## [1] 2021
+```
+
+Sin embargo, en R también podemos almacenar los resultados en objetos. Creamos los objetos mediante asignaciones (`&lt;-`). En este caso, guardemos el valor (a diferencia de imprimirlo). 
+
+
+```r
+year &lt;- 43*47 # Se crea un objeto
+```
+
+Si a esto lo ponemos entre paréntesis combinamos ambos enfoques: se guarda el objeto y se imprime el resultado
+
+
+```r
+(year &lt;- 43*47) # Se crea un objeto y se imprime
+```
+
+```
+## [1] 2021
+```
+---
+
+## Asignaciones 
+
+- El símbolo para crear un objeto es ` &lt;-` (alt + -) y se llama asignador, también se puede usar `=` pero no es recomendable.
+- Las asignaciones se crean de la siguiente manera: nombre_del_objeto `&lt;-` valor.  
+- Como vimos, una vez que creo un objeto, R (por defecto) no imprime su valor. Este se puede obtener escribiendo simplemente el nombre del objeto o mediante la función `print()`:
+
+.codefont[
+
+```r
+year &lt;- 43*47 # Se crea un objeto
+
+year # Imprime el objeto year
+```
+
+```
+## [1] 2021
+```
+
+```r
+print(year) # Imprime el objeto year
+```
+
+```
+## [1] 2021
+```
+]
+
+---
+
+## Algunos comandos básicos
+
+```r
+ls() # Lista los objetos en el ambiente
+
+rm(year) # Borra objeto del ambiente
+
+rm(list=ls()) # Borra todos los objetos del ambiente
+
+help(ls) # Buscar ayuda sobre una función
+```
+
+---
+class: inverse, center, middle
+
+# Objetos 
+
+---
+
+## Clases y tipos de objetos
+
+- En R utilizamos constantemente objetos. Cada objeto tiene una clase, tipo y atributos. 
+
+- Esto es importante porque las funciones que podemos aplicar a nuestros datos dependen del objeto en el que los definimos.
+
+- El uso de objetos tiene muchos benificios como extraer parte de ellos para determinados usos, duplicarlos o realizar operaciones sin imprimir en la consola.
+
+---
+
+## Tipos de objetos
+
+El tipo de un objeto refiere a cuál es el tipo de los datos dentro del objeto. Los tipos más comunes son:
+ 
+
+ 
+&lt;table class="table table-striped table-hover table-condensed" style="font-size: 20px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Nombre &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Tipos &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Ejemplo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; integer &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Númerico: valores enteros &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; double &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Númerico: valores reales &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 10.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; character &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Texto &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Diez &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; logical &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Lógico (TRUE or FALSE) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Clases o estructura de datos
+
+Las clases de objetos son formas de representar datos para usarlos de forma eficiente. Se dividen en cuántas dimensiones tienen y si poseen distintos tipos de datos o no. Las clases de datos más comunes en R son: 
+
+- `vector` (vectores): es la forma más simple, son unidimensionales y de un solo tipo
+
+- `lists` (listas): son unidimensionales pero no están restringidas a un solo tipo de datos
+
+- `matrix` (matrices): tienen dos dimensiones (filas y columnas) y un solo tipo de datos. 
+
+- `dataframes` (marcos de datos): son el tipo de estructura al que más acostumbrado estamos, con dos dimensiones (filas y columnas) y puede incluir distintos tipos de datos (uno por columna). Pueden considerarse como listas de vectores con el mismo tamaño. 
+
+
+En ocasiones podemos transformar objetos de una clase a otra.
+
+
+---
+## Clases y tipos de objetos
+
+.center[
+&lt;img src="ima/sch.jpg" width="800px" /&gt;
+]
+
+.right[ R variables and data types: Introduction to R Programming, Sydney-Informatics
+]
+
+
+---
+
+## Funciones para explorar objetos
+
+R tiene funciones que nos permiten identificar la clase, el tipo, la estructura y los atributos de un objeto.
+
+- `class()` - ¿Qué tipo de objeto es?
+
+- `typeof()` - ¿Qué tipos de data tiene el objeto?
+
+- `length()` - ¿Cuál es su tamaño?
+
+- `attributes()` - ¿Tiene metadatos?
+
+---
+
+## Clases y tipos de objetos
+
+
+```r
+  # Creamos algunos objetos distintos
+  year &lt;- 2021
+  nombre &lt;- "Dos mil veintiuno"
+  
+  # Uso la función class para averiguar la clase de objeto
+  class(year) 
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+  class(nombre)
+```
+
+```
+## [1] "character"
+```
+
+```r
+  # Uso la función typeof para averiguar el tipo de la data del objeto
+  typeof(nombre)
+```
+
+```
+## [1] "character"
+```
+
+---
+
+## Clases y tipos de objetos
+
+Todo lo que escribimos entre comillas se interpeta como texto, por más que sean números. 
+
+
+```r
+  year_2 &lt;- "2021"
+
+  class(year_2)
+```
+
+```
+## [1] "character"
+```
+
+```r
+  vof &lt;- TRUE
+  class(vof) 
+```
+
+```
+## [1] "logical"
+```
+  
+---
+
+## ¿Por qué importan los tipos y clases? 
+Supongamos que creamos un objeto con el valor 10, al que luego le sumaremos otro objeto con el valor 20. 
+
+
+```r
+obj_1 &lt;- "10"
+
+class(obj_1)
+```
+
+```
+## [1] "character"
+```
+
+```r
+obj_1 + 20 # Da error
+```
+
+```
+## Error in obj_1 + 20: non-numeric argument to binary operator
+```
+
+---
+
+## ¿Por qué importan los tipos y clases? 
+En cambio, si creamos el objeto de tipo númerico:
+
+
+```r
+obj_1 &lt;- 10
+
+class(obj_1)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+obj_1 + 20 # Funciona
+```
+
+```
+## [1] 30
+```
+
+---
+
+## ¿Por qué importan los tipos y clases? 
+Normalmente no trabajamos con objetos de un solo valor, y reescribirlos no es una opción. Para ellos tenemos coercionadores `as.logical()`, `as.integer()`, `as.double()`, o `as.character()`: funciones que transforman un objeto de un tipo a otro. En este caso:
+
+```r
+obj_1 &lt;- "10"
+
+class(obj_1)
+```
+
+```
+## [1] "character"
+```
+
+```r
+obj_1 &lt;- as.numeric(obj_1)
+class(obj_1)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+is.numeric(obj_1) # Podemos verificarlo directamente también
+```
+
+```
+## [1] TRUE
+```
+
+---
+
+## Vectores 
+Un vector es una colección de elementos. Los vectores atómicos son los que contienen elementos todos del mismo tipo (que es lo más normal en el análisis de datos). Hay 4 tipos de vectores: lógicos, character, integer y double (estos dos últimos son numéricos). Los elementos determinarán el tipo del objeto. Crear un vector es muy sencillo mediante la función `c()`:
+
+.codefont[
+
+```r
+mi_primer_vector &lt;- c(1, 3, 5, 7, 143) 
+print(mi_primer_vector)
+```
+
+```
+## [1]   1   3   5   7 143
+```
+
+```r
+class(mi_primer_vector)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+length(mi_primer_vector)
+```
+
+```
+## [1] 5
+```
+
+```r
+str(mi_primer_vector)
+```
+
+```
+##  num [1:5] 1 3 5 7 143
+```
+]
+
+---
+class: inverse, center, middle
+
+# Vectores
+
+---
+
+## Vectores 
+
+.codefontchico[
+
+```r
+v1 &lt;- c(1:5) # Todos los números de 1 a 5
+v1
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+```r
+v2 &lt;- seq(0, 50, 10) # De 0 a 50 de a 10 números
+v2
+```
+
+```
+## [1]  0 10 20 30 40 50
+```
+
+```r
+v3 &lt;- c(v1, v2) # Combino vectores creando un nuevo vector
+v3
+```
+
+```
+##  [1]  1  2  3  4  5  0 10 20 30 40 50
+```
+
+```r
+v4 &lt;- c("rojo", "verde", "blanco") # character
+v4
+```
+
+```
+## [1] "rojo"   "verde"  "blanco"
+```
+
+```r
+v5 &lt;- c(TRUE, TRUE, FALSE, TRUE) # lógico
+v5
+```
+
+```
+## [1]  TRUE  TRUE FALSE  TRUE
+```
+]
+
+---
+
+## Indexación 
+Cuando queremos referirnos a uno o varios elementos dentro de un vector utilizamos `[]` (indexación).
+
+```r
+## Indexación:
+v2
+```
+
+```
+## [1]  0 10 20 30 40 50
+```
+
+```r
+v2[1] # El primer elemento dentro del vector 
+```
+
+```
+## [1] 0
+```
+
+```r
+# Nos sirve por ejemplo para extraer partes del vector:
+v3 &lt;- v2[1:3] # Creo nuevo vector con los elementos del 1 al 3
+v3
+```
+
+```
+## [1]  0 10 20
+```
+
+---
+
+## Operaciones con vectores
+
+También podemos realizar operaciones con los vectores númericos:
+
+```r
+## Operaciones con vectores:
+v3
+```
+
+```
+## [1]  0 10 20
+```
+
+```r
+v3 + 2 # Se realiza la operación sobre cada elemento del vector
+```
+
+```
+## [1]  2 12 22
+```
+
+---
+
+## Coerción 
+
+¿Qué pasa si unimos vectores de distinto tipo? 
+
+Si unimos un vector de tipo caracter con uno númerico, R convertirá todo el vector a caracter. Si unimos un vector númerico (double o integer) a lógico, R convertirá el vector en númerico (`TRUE = 1`, `FALSE = 0`)
+
+
+```r
+## Ejemplo de coerción automática:
+v2 &lt;- seq(0, 50, 10) # De 0 a 50 de a 10 números
+v4 &lt;- c("rojo", "verde", "blanco") # character
+v6 &lt;- c(v2, v4)
+v6
+```
+
+```
+## [1] "0"      "10"     "20"     "30"     "40"     "50"     "rojo"   "verde" 
+## [9] "blanco"
+```
+
+```r
+class(v6)
+```
+
+```
+## [1] "character"
+```
+
+---
+class: inverse, center, middle
+
+# Dataframes 
+
+---
+
+## Dataframes
+- Un dataframe o marco de datos (es lo que nos solemos referir como "base de datos"). 
+
+- Es por lejos la estructura más usada y útil para almacenar y analizar datos
+
+- Formalmente, son la conjunción de dos o más vectores (independientemente de su tipo) en una tabla con dimensiones (Grolemund, 2014)
+
+- Cada vector se transforma en una columna.
+
+- Es una forma de estructurar datos con filas y columnas. Las filas suelen ser las observaciones y las columnas las variables. 
+
+- Cada columna **debe** tener la misma longitud (número de observaciones)
+
+---
+
+## Dataframes
+Posible estructura de un dataframe o marco de datos
+
+.center[
+&lt;img src="ima/dataframe.png" width="1000px" /&gt;
+]
+
+.right[(Grolemund, 2014)]
+---
+
+## Dataframes
+Normalmente los dataframes con los que trabajamos los importamos desde otro formato (lo veremos más adelante), pero también podemos crearlos fácilmente en R. 
+
+Supongamos que queremos estructurar los resultados de una encuesta muy corta:
+
+.codefont[
+
+```r
+# Usamos la función data.frame
+encuesta &lt;- data.frame(edad = c(18,24,80,40,76), 
+                       ideologia = c("Izquierda", "Izquierda", "Derecha", 
+                                     "Centro", "Derecha"),
+                       voto = c("Partido A", "Partido A", "Partido C",
+                                "Partido B", "Partido B"))
+class(encuesta)
+```
+
+```
+## [1] "data.frame"
+```
+]
+
+---
+
+## Dataframes
+.codefont[
+
+```r
+# Con la función head() puedo ver las primeras filas del dataframe
+head(encuesta) 
+```
+
+```
+##   edad ideologia      voto
+## 1   18 Izquierda Partido A
+## 2   24 Izquierda Partido A
+## 3   80   Derecha Partido C
+## 4   40    Centro Partido B
+## 5   76   Derecha Partido B
+```
+
+```r
+# Para la visión extendida usar view() o click en el objeto en el ambiente
+```
+]
+
+---
+
+## Dataframes: indexación
+De forma similar a los vectores, la indexación `[]` nos permite acceder a datos dentro de nuestro dataframe. Como los dataframes tienen dos dimensiones (filas y columnas), tenemos que especificar cuáles valores queremos obtener. Para ello la indexación se divide en dos por una coma: antes de la coma nos referimos a las filas, y luego de la coma a las columnas:
+
+.codefont[
+
+```r
+# Valor de fila 1 y columna 1
+encuesta[1, 1]
+```
+
+```
+## [1] 18
+```
+
+```r
+# Valor de toda la columna 1 (no fijamos filas entonces nos devuelve todas)
+encuesta[, 1]
+```
+
+```
+## [1] 18 24 80 40 76
+```
+
+```r
+ # Valor de toda la fila 1 (no fijamos columnas entonces nos devuelve todas)
+encuesta[1, ]
+```
+
+```
+##   edad ideologia      voto
+## 1   18 Izquierda Partido A
+```
+]
+---
+
+## Dataframes: indexación
+
+R nos permite utilizar funciones dentro de funciones. Por ejemplo, podemos usar el operador `:` para columnas consecutivas según orden o la función `c()` para referirnos a dos columnas en una indexación:
+
+```r
+encuesta[1, 1:2] # Valor de fila 1 y las columnas 1 y 2
+```
+
+```
+##   edad ideologia
+## 1   18 Izquierda
+```
+
+```r
+encuesta[1, c(1,3)] # Valor de fila 1 y las columnas 1 y 3
+```
+
+```
+##   edad      voto
+## 1   18 Partido A
+```
+
+Los números negativos nos devuelven lo opuesto:
+
+```r
+encuesta[1, -3] # Valor de fila 1 y las columnas 1 y 2
+```
+
+```
+##   edad ideologia
+## 1   18 Izquierda
+```
+
+---
+
+## Dataframes 
+Una segunda manera para referirnos a datos dentro un dataframe es el usando el símbolo `$` . Es la manera más utilizada para refernirnos a una columna de un dataframe, y es muy sencillo de utilizar.  
+
+.codefont[
+
+```r
+# Primero escribimos el nombre del dataframe, seguido por el símbolo $ y 
+# el nombre de la variable (sin comillas)
+encuesta$edad # Esto imprime todos los valores de esa variable
+```
+
+```
+## [1] 18 24 80 40 76
+```
+
+```r
+# En un dataframe cada variable es un vector y podemos fijarnos su clase
+class(encuesta$edad) 
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+mean(encuesta$edad) # Podemos aplicarle funciones (la media en este caso)
+```
+
+```
+## [1] 47.6
+```
+]
+
+---
+
+## Ejercicio
+
+.content-box-blue[
+*(1) Crear un vector con la edad de los integrantes de tu hogar*
+
+*(2) Realizar una operación sobre ese vector para calcular la edad de cada integrante en 2030*
+
+*(3) Crear un tercer vector con el nombre de cada uno y combinar los 3 vectores en un dataframe*
+]
+
+---
+class: inverse, center, middle
+
+# Funciones
+
+---
+
+## Funciones 
+
+- Una función es una serie de instrucciones para realizar una tarea específica. La función suele necesitar un imput (generalmente datos) y suele devolver un output (generalmente datos luego de cierta regla)
+
+- Por ejemplo, en el caso anterior, usamos la función `mean()` para calcular la media de la variable "edad" del dataframe "encuesta"
+
+- Usar una función en sencillo: escribimos el nombre de la función, seguido de un paréntesis y dentro los datos a los que le queremos aplicar la función. Pueden ser objetos o directamente valores. Ej. `mean(c(10,20,30))` o `mean(objeto)`
+
+- Dentro de la función se especifican los argumentos, que pueden ser dividos en dos tipos. El primero son los datos a los que se le aplica la función y el resto detalles de cómo se computa la función.
+
+---
+
+## Funciones 
+.center[
+&lt;img src="ima/ima_fun.png" width="1250px" /&gt;
+]
+---
+
+## Funciones (ejemplo) 
+
+
+```r
+# Supongamos que queremos calcular la media de: 12,24,36,48,60 
+(12 + 24 + 36 + 48 + 60)/5 # Calculo directamente la media
+```
+
+```
+## [1] 36
+```
+
+```r
+data_ej &lt;- c(12, 24, 36, 48, 60) # Genero el vector con los 5 números 
+sum(data_ej) / length(data_ej) # Calculo con dos funciones su media
+```
+
+```
+## [1] 36
+```
+
+```r
+mean(data_ej) # Calculo la media directamente con la función mean()
+```
+
+```
+## [1] 36
+```
+
+```r
+# También se puede ingresar data directamente en el argumento x
+mean(c(12, 24, 36, 48, 60)) 
+```
+
+```
+## [1] 36
+```
+
+---
+
+## Funciones: R Base
+
+- R viene con un cojunto de [funciones](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)  
+
+- Las funciones que vienen "por defecto" son las que escribieron los creadores, al igual que en otros softwares no libres.
+
+- La ventaja de R es que cualquiera puede crear nuevas funciones y publicarlas. Colecciones de funciones (generalmente relacionadas) se llaman "paquetes".
+
+---
+
+## Funciones: argumentos
+- Las funciones generalmente cuentan con argumentos que van dentro de los paréntesis.
+
+- La mayoría de las funciones cuentan con el argumento "x" que suele ser el objeto al que le pasaremos la función. Al ser la mayoría de las veces el primer argumento, muchas veces no se explicita: 
+
+
+```r
+media_fun &lt;- mean(data_ej) # Sin explicitar argumento x
+
+media_fun_x &lt;- mean(x = data_ej) # Explicitando argumento x
+
+identical(media_fun, media_fun_x) # El mismo resultado
+```
+
+```
+## [1] TRUE
+```
+
+---
+
+## Funciones: argumentos 
+- Muchas funciones necesitan más de un argumento para funcionar de forma correcta. 
+
+- Por ejemplo, pensemos en la función `identical()`: "The safe and reliable way to test two objects for being exactly equal. It returns `TRUE` in this case, `FALSE` in every other case.".
+
+- Por definición, `identical()` necesita dos conjuntos de datos distintos, para testear si son iguales.
+
+- En la documentación `help(identical)` podemos ver que cuenta no solo con el argumento x, sino que también con y. 
+
+.codefont[
+
+```r
+# Dos maneras de aplicar la función
+identical(media_fun, media_fun_x) # por posición
+```
+
+```
+## [1] TRUE
+```
+
+```r
+identical(x = media_fun, y = media_fun_x) # por especificación
+```
+
+```
+## [1] TRUE
+```
+]
+---
+
+## Funciones: argumentos 
+
+- A su vez, las funciones muchas veces cuentan con otros argumentos aparte de los datos que usan de insumo. Son detalles de cómo queremos aplicar la regla o el output que recibimos. 
+
+- Volvamos a la función `mean()`. Voy a crear un dataframe con la posición que obtuvo Uruguay en los últimos 5 mundiales de futbol masculino
+
+.codefont[
+
+```r
+# Dataframe con el resultado de Uruguuay en los últimos 5 mundiales
+uru_mundial &lt;- data.frame(year = c(2002, 2006, 2010, 2014, 2018),
+                          posicion = c(26, NA, 4, 12, 5))
+# Veamos la posición promedio:
+mean(uru_mundial$posicion) 
+```
+
+```
+## [1] NA
+```
+
+```r
+# Como tenemos un dato perdido, la función nos devuelve NA
+
+# Si especificamos el argumento na.rm (no tener en cuenta los datos perdidos):
+mean(uru_mundial$posicion, na.rm = TRUE)
+```
+
+```
+## [1] 11.75
+```
+]
+---
+
+## Funciones: argumentos por defecto
+
+- Es importante entender que la función `mean()` &lt;b&gt; por defecto &lt;/b&gt; tiene el argumento `na.rm = FALSE`. De esta forma, si nosotros solamente le pasamos el argumento x, no quitará los datos perdidos. 
+
+- Leer la documentación de las funciones es fundamental, y sobretodo prestar atención a los argumentos por defecto.
+
+---
+
+## Funciones: argumentos 
+
+
+```r
+help(mean)
+```
+
+.center[
+&lt;img src="ima/ima_mean.jpeg" width="1000px" /&gt;
+]
+
+---
+
+## Funciones y código
+
+Normalmente al transformar datos utilizamos varias funciones. Esto se puede hacer de varias formas:
+
+- Correr funciones de a una, siempre al mismo objeto
+
+- Ir creando objetos intermedios a medida que aplicamos funciones
+
+- Anidar funciones (se aplicará primero la función más al centro y por último la primera desde la izquierda)
+
+- Pipeline ([magrittr](https://magrittr.tidyverse.org/))
+
+---
+
+## Funciones y código: ejemplos 
+
+Supongamos que queremos aplicar dos funciones a un vector númerico: `mean()` para calcular la media y `round()` para redondear el resultado a 1 dígito después de la coma.
+
+.codefontchico[
+
+```r
+data_ej &lt;- c(12, 21, 33, 41, 27, 23) 
+
+# Correr funciones de una, almismo objeto
+resultado_A &lt;- mean(data_ej) # Primero estimo la media
+resultado_A &lt;- round(resultado_A, digit = 1) # Redondeo
+
+# Correr funciones de una, con objetos intermedios
+resultado_B_1 &lt;- mean(data_ej) # Creo un primer objeto con la media
+resultado_B_2 &lt;- round(resultado_B_1, digits = 1) # Creo 2do objeto con la media redondeada
+
+# Corro las dos funciones en la misma línea
+resultado_C &lt;- round(mean(data_ej), digits = 1)
+
+# Pruebo que los resultados sean iguales:
+identical(resultado_A, resultado_B_2)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+identical(resultado_A, resultado_C)
+```
+
+```
+## [1] TRUE
+```
+]
+
+---
+
+## Crear funciones 
+
+- R permite crear tus propias funciones con facilidad. 
+
+- Esto es muy útil para cuando queremos aplicar determinadas líneas de código a varios objetos distintos.
+
+.center[
+&lt;img src="ima/function.png" width="700px" /&gt;
+]
+
+.right[Fuente: Grolemund (2014)
+]
+---
+
+## Crear funciones
+
+Supongamos que tenemos varios dataframes con la cantidad de vacas (en miles) y población (en millones) para un puñado de países en 2017, y que queremos agregar una tercera columna que indique la cantidad de vacas per capita. Estos son los datos que queremos transformar:
+
+.codefont[
+
+
+
+```r
+data
+```
+
+```
+##        pais humanos vacas
+## 1   Uruguay     3.4 11800
+## 2 Argentina    43.8 53500
+## 3    Brasil   209.5 22600
+## 4    Mexico   128.6 16500
+```
+
+```r
+data_2
+```
+
+```
+##            pais humanos vacas
+## 1       Uruguay     3.4 11800
+## 2 Nueva Zelanda     4.5  9900
+## 3     Australia    43.8 53500
+## 4         Japón   126.3  3800
+```
+]
+
+---
+
+## Crear funciones
+
+.codefont[
+
+```r
+# Ahora quiero calcular la cantidad de vacas per capita.
+# Podría hacer:
+
+data$vacas_pc &lt;- (data$vacas / 1000) / data$humanos 
+data
+```
+
+```
+##        pais humanos vacas  vacas_pc
+## 1   Uruguay     3.4 11800 3.4705882
+## 2 Argentina    43.8 53500 1.2214612
+## 3    Brasil   209.5 22600 0.1078759
+## 4    Mexico   128.6 16500 0.1283048
+```
+
+```r
+# Ahora me gustaría tener una tabla un poco más prolija:
+# números redondeados y agrego "per"
+
+data$vacas_pc &lt;- round(data$vacas_pc, digits = 1)
+data$vacas_pc &lt;- paste(data$vacas_pc, "per", sep = " ")
+
+print(data)
+```
+
+```
+##        pais humanos vacas vacas_pc
+## 1   Uruguay     3.4 11800  3.5 per
+## 2 Argentina    43.8 53500  1.2 per
+## 3    Brasil   209.5 22600  0.1 per
+## 4    Mexico   128.6 16500  0.1 per
+```
+]
+
+---
+
+## Crear funciones
+Como este paso lo voy a repetir muchas veces, creo una función que llamo `calc_vacas()` que realice todos estos cambios:
+.codefont[
+
+```r
+calc_vacas &lt;- function(x, y){ 
+  vacas_pc &lt;- (x / 1000) / y   # Calculo la proporción de x / 1000 sobre y
+  vacas_pc_1 &lt;- round(vacas_pc, digits = 2) # Redondeo
+  vacas_pc_2 &lt;- paste(vacas_pc_1, "per", sep = " ")
+ return(vacas_pc_2)
+}
+
+# Aplico la función a data_2 
+data_2$vacas_pc &lt;- calc_vacas(x = data_2$vacas, y = data_2$humanos)
+data_2
+```
+
+```
+##            pais humanos vacas vacas_pc
+## 1       Uruguay     3.4 11800 3.47 per
+## 2 Nueva Zelanda     4.5  9900  2.2 per
+## 3     Australia    43.8 53500 1.22 per
+## 4         Japón   126.3  3800 0.03 per
+```
+]
+
+---
+
+## Crear funciones
+
+Copiando y pegando código
+
+```r
+data$vacas_pc &lt;- (data$vacas / 1000) / data$humanos
+data$vacas_pc &lt;- round(data$vacas_pc, digits = 1)
+data$vacas_pc &lt;- paste(data$vacas_pc, "per", sep = " ")
+
+data_2$vacas_pc &lt;- (data_2$vacas / 1000) / data_2$humanos
+data_2$vacas_pc &lt;- round(data_2$vacas_pc, digits = 1)
+data_2$vacas_pc &lt;- paste(data_2$vacas_pc, "per", sep = " ")
+```
+
+Con una función
+
+```r
+data$vacas_pc &lt;- calc_vacas(x = data$vacas, y = data$humanos)
+
+data_2$vacas_pc &lt;- calc_vacas(x = data_2$vacas, y = data_2$humanos)
+```
+
+---
+
+## Errores y advertencias
+- Cuando utilizamos funciones podemos encontrarnos con errores (errors) y advertencias (warnings). La principal diferencia entre ellas es que el error implica que la función no se pudo aplicar, mientras que en la advertencia la función fue aplicada pero que algo no funcionó como esperado. También es posible ver mensajes (messages) que simplemente informan algo sobre la función
+
+
+```r
+vector_ej &lt;- rnorm(n = 10, mean = 10, sd = 5) # Creo valores aleatorios
+
+mean(Vector_ej) # Aplico función para obtener la media
+```
+
+```
+## Error in mean(Vector_ej): object 'Vector_ej' not found
+```
+
+.content-box-blue[
+*¿A qué se debe este error?*
+]
+
+---
+
+## Errores y advertencias
+
+
+```r
+vector_ej &lt;- rnorm(n = 10, mean = 10, sd = 5) # Creo valores aleatorios
+
+mean(vector_ej) # Aplico función para obtener la media
+```
+
+```
+## [1] 8.306963
+```
+
+---
+
+## Errores y advertencias 
+
+En el caso anterior, es sencillo entender porque la función no corrió. Sin embargo, muchas veces podemos no entender que es lo que salió mal y copiar y pegar el error en un buscador de internet es un buen primer paso.
+
+.codefontchico[
+
+```r
+vector_1 &lt;- c("10", "35%", "35", "50") # Vector de caracteres que contiene números 
+vector_1
+```
+
+```
+## [1] "10"  "35%" "35"  "50"
+```
+
+```r
+vector_2 &lt;- as.numeric(vector_1) # Transformo a vector númerico
+```
+
+```
+## Warning: NAs introduced by coercion
+```
+
+```r
+vector_2 # Los valores que además del número tenían (%) no pueden pasarse a númericos
+```
+
+```
+## [1] 10 NA 35 50
+```
+
+```r
+vector_1 &lt;- gsub("%", "", vector_1) # Quito los % del vector original 
+vector_1 # Sin valores perdidos
+```
+
+```
+## [1] "10" "35" "35" "50"
+```
+
+```r
+vector_2 &lt;- as.numeric(vector_1) # Transformo a vector númerico
+vector_2 # Los valores que además del número tenían (%) no pueden pasarse a númericos
+```
+
+```
+## [1] 10 35 35 50
+```
+]
+
+---
+
+class: inverse, center, middle
+# Paquetes
+
+---
+
+## Paquetes 
+- Los paquetes son conjuntos de funciones, documentación de ayuda y datos-
+--
+
+- El conjunto de funciones que vienen por defecto en R se le denomina "Base". Por ej. las funciones que hemos utilizado hasta ahora  -`mean()`, `identical()`, `help()`- están dentro del R Base.
+--
+
+- El repositorio principal donde se alojan los paquetes de R se llama Comprehensive R Archive Network [CRAN](https://cran.r-project.org/). Hay más de 10.000 paquetes alojados en CRAN. Aquí hay dos listas con algunos de los paquetes más 
+útiles: [support.rstudio](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages) y [towardsdatascience](https://towardsdatascience.com/a-comprehensive-list-of-handy-r-packages-e85dad294b3d)  
+--
+
+- Los paquetes alojados en CRAN son testados antes de ser publicados. Por eso es recomendable tener cuidado con utilizar paquetes que no han sido publicados allí aún.
+--
+
+- Los paquetes normalmente están relacionados por alguna temática, por ejemplo existen paquetes específicos para manipulación de datos [dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf), visualización de datos [ggplot2](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf) o importar y exportar datos [readr](https://cran.r-project.org/web/packages/readr/readr.pdf). Dado que R es libre, cualquier persona puede crear y publicar un paquete (publicarlo en CRAN requiere ciertos procesos igualmente), esto facilita que haya paquetes muy específicos para ciertas tareas que pueden ser de gran utilidad. Por ejemplo, existen paquetes para  conectarse con la API de Twitter [rtweet](https://cran.r-project.org/web/packages/rtweet/rtweet.pdf), para utilizar los datos de [Gapminder](https://cran.csiro.au/web/packages/gapminder/gapminder.pdf) o para analizar datos electorales y de opinión pública en Uruguay [opuy](https://github.com/Nicolas-Schmidt/opuy/blob/master/man/figures/Manual_opuy.pdf)
+
+---
+
+## Paquetes: instalación 
+- Cuando abrimos R solamente tenemos cargado por defecto el paquete Base. 
+
+- La primera vez que queremos utilizar un paquete tenemos que descargarlo con el siguiente comando:
+
+
+```r
+# Para descargar paquetes de CRAN, utilizamos la siguiente función:
+install.packages("nombre_del_paquete")
+install.packages("dplyr") # Ejemplo
+
+# Existen otros paquetes no alojados en CRAN, que se instalan con
+# el paquete "devtools" 
+```
+
+---
+
+## Paquetes: cargar 
+- Luego de instalarlo (una sola vez por versión de R), tenemos que cargar el paquete utilizando la función `library()`
+
+
+- Esto lo debemos realizar en cada sesión de R que vayamos a utilizar (cada vez que abrimos R). 
+
+```r
+library("nombre_del_paquete")
+library("dplyr") # Ejemplo
+```
+
+---
+
+## Paquetes
+En ocasiones los paquetes tienen funciones que se llaman igual, lo que puede llevar a errores. En estos casos -una vez instalado el paquete- podemos usar una función sin cargar el paquete de la siguiente manera:
+
+.codefont[
+
+```r
+df_1 &lt;- data.frame(col_a = c(1, 2, 3),
+                   col_b = c(2, 4, 6))
+
+df_2 &lt;- data.frame(col_a = c(1, 2, 3),
+                   col_c = c(-2, 1, 6))
+
+# Uso la función rbind.fill() que a diferencia de rbind() del Base, 
+# permite unir datafranes con columnas que no matchean de forma exacta,
+# agregando NAs
+
+# No cargo todo el paquete plyr sino que llamo la función específica usando ::
+df_3 &lt;- plyr::rbind.fill(df_1, df_2)
+```
+]
+
+---
+class: inverse, center, middle
+# Operadores
+
+---
+
+## Operadores aritméticos 
+
+&lt;table class="table table-striped table-hover table-condensed" style="font-size: 20px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Descripcion &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Ejemplo &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Resultado &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; + &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Suma &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2+2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; - &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Resta &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2-2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; * &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Multiplicación &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2*2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; % &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; División &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2%2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ^ &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Potencia &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2^3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+
+## Operadores relacionales 
+
+&lt;table class="table table-striped table-hover table-condensed" style="font-size: 20px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Descripcion &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Ejemplo &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Resultado &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Menor a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &amp;lt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &amp;gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Mayor a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 6 &amp;gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt;= &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Menor o igual a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &amp;lt;= 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &amp;gt;= &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Mayor o igual a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 6 &amp;gt;= 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; %in% &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Está incluido dentro de &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2 %in% c(0, 1, 2) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; == &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Igual a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; hola == hello &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; FALSE &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; != &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Distinto a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; hola != hello &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TRUE &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## Operadores booleanos
+
+&lt;table class="table table-striped table-hover table-condensed" style="font-size: 20px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Operador &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Prueba &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; a &amp;amp; b &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; a y b son verdaderos &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; a | b &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; al menos una de a o b son verdaderas &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; !a &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; a no es verdadera &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; isTrue(a) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; a es verdadera &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false,
+"incremental": true,
+"df_print": "kable",
+"smaller": true,
+"widescreen": true,
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

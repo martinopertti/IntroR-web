@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Intro a R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Escuela de Invierno en Métodos 2022 - Martín Opertti" />
+    <meta name="date" content="2022-07-23" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+    <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="estilo.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Intro a R
+## Día 4: Visualización de datos y estadística inferencial
+### Escuela de Invierno en Métodos 2022 - Martín Opertti
+### July 23, 2022
+
+---
+
+class: inverse, center, middle
+
+
+
+# Principios de la visualización de datos
+
+---
+
+## Introducción
+
+- Las visualizaciones representan datos de forma gráfica a través de líneas, formas, colores, etc.
+
+- La visualización de datos está a mitad de camino entre la ciencia y el arte. Por un lado, los gráficos deben ser una representación exacta de los datos subyacentes, por el otro, una visualización efectiva debe ser estéticamente agradable. Idealmente, logramos alcanzar ambos objetivos. 
+
+- Lo imprescindible es no equivocarse con la parte matemática. En segundo lugar, debemos hacer el esfuerzo para que los gráficos tengan en consideración lo que la ciencia sugiere sobre cómo las personas reaccionan a distintos estímulos y lograr gráficos estéticamente agradables.
+
+- Visualizar los datos de forma gráfica tiene muchos benficios
+      - Permite captar de forma rapida patrones que estadísticas descriptivas no permitirían
+      - Permite comunicar patrones en los datos de forma rápida y efectiva
+      - Permite identificar patrones complejos (relaciones no lineales por ejemplo)
+
+---
+## ¿Por qué visualizar?
+
+Cuatro conjuntos de datos:
+
+
+
+&lt;table class="table table-hover table-condensed" style="font-size: 20px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; set &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mean_x &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mean_y &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sd_x &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sd_y &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Conjunto I &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Conjunto II &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Conjunto III &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Conjunto IV &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## ¿Por qué visualizar?
+
+.center[
+![](dia_4_files/figure-html/ch2-1.png)&lt;!-- --&gt;
+]
+
+---
+## Un paseo por los NO
+
+.center[
+&lt;img src="ima/mon_costs.jpg" width="600px" /&gt;
+]
+.right[Nigel Holmes (1982)]
+
+---
+## Un paseo por los NO
+
+.center[
+&lt;img src="ima/life_exp.png" width="600px" /&gt;
+]
+.right[Healey (2018)]
+
+---
+## Tipos de errores
+- Ugly (feo): problemas estéticos pero gráfico claro e informativo
+- Bad (malo): problemas relacionados a la percepción: poco claro, confuso
+- Wrong (incorrecto): problemas relacionados a la matemática, objetivamente incorrecto
+
+.center[
+&lt;img src="ima/malas_graficas.png" width="400px" /&gt;
+]
+.right[[Wilke (2019)](https://clauswilke.com/dataviz/introduction.html)]
+
+---
+## Aesthetics
+
+- Cuando visualizamos datos tomamos valores y los convertimos de forma sistemática y lógica en elementos visuales.
+
+- Los aesthetics (cosas que puedes ver) son características cuantificables que le asignamos a nuestros datos
+
+.center[
+&lt;img src="ima/aes.png" width="500px" /&gt;
+]
+.right[[Wilke (2019)](https://clauswilke.com/dataviz/aesthetic-mapping.html)]
+
+
+---
+## Aesthetics
+
+- Distintos tipos de datos combinan bien con distintos tipos de aesthetics. Por ejemplo, no tiene mucho sentido utilizar formas para una variable contínua o gradientes de color para una variable categórica sin orden.
+
+- Existen muchos estudios como los humanos procesan estímulos visuales. Estos estudios permiten diferenciar qué tan fácil nos es entender los patrones en los datos a partir de estos aesthetics.
+
+
+---
+## Ranking perceptual para datos ordenados
+
+.center[
+&lt;img src="ima/prior.png" width="400px" /&gt;
+]
+.right[Schwabish (2021)]
+
+--
+## Remarcar datos
+.center[
+&lt;img src="ima/atention.png" width="600px" /&gt;
+]
+.right[Schwabish (2021)]
+
+
+---
+## Tipos de gráficos
+
+- Debido a que somos mejores identificado posiciones y tamaño, los gráficos de barras, líneas y dispersón son los más comunes.
+
+- Existe una tendencia hacia presentar gráficos de dispersión (maximizar el volumen de información mostrado) y gráficos que resumen modelos estadísticos.
+
+- Los paneles (o facetas) son cada vez más usados (ggplot2 da una enorme ventaja en este sentido)
+
+- [From Data to Viz](https://www.data-to-viz.com/#connectedscatter) es un gran recurso para elegir qué tipo de visualización podemos usar para cadá gráfico y además incluye código de ejemplos en R!
+
+---
+## Tipos de gráficos: cantidades
+
+.center[
+&lt;img src="ima/cant1.png" width="600px" /&gt;
+]
+
+.center[
+&lt;img src="ima/cant2.png" width="600px" /&gt;
+]
+
+.right[Wilke (2019)]
+
+
+---
+## Tipos de gráficos: distribuciones
+
+.center[
+&lt;img src="ima/dist1.png" width="600px" /&gt;
+]
+
+.center[
+&lt;img src="ima/dist2.png" width="600px" /&gt;
+]
+
+.right[Wilke (2019)]
+
+---
+## Tipos de gráficos: proporciones
+
+.center[
+&lt;img src="ima/prop1.png" width="500px" /&gt;
+]
+
+.center[
+&lt;img src="ima/prop2.png" width="500px" /&gt;
+]
+
+.center[
+&lt;img src="ima/prop3.png" width="450px" /&gt;
+]
+
+.right[Wilke (2019)]
+
+---
+## Tipos de gráficos: relación x-y
+
+.center[
+&lt;img src="ima/xy1.png" width="500px" /&gt;
+]
+
+.center[
+&lt;img src="ima/xy2.png" width="500px" /&gt;
+]
+
+.center[
+&lt;img src="ima/xy3.png" width="500px" /&gt;
+]
+
+.right[Wilke (2019)]
+
+---
+## Tipos de gráficos: geoespacial
+
+.center[
+&lt;img src="ima/geo.png" width="800px" /&gt;
+]
+
+.right[Wilke (2019)]
+
+---
+## Tipos de gráficos: incertidumbre
+
+.center[
+&lt;img src="ima/inc1.png" width="600px" /&gt;
+]
+
+.center[
+&lt;img src="ima/inc2.png" width="600px" /&gt;
+]
+
+.right[Wilke (2019)]
+
+---
+## Principios prácticos
+
+- Tres pilares: claridad, precisión y eficiencia
+
+.content-box-blue[*"Un buen gráfico da el lector la mayor cantidad de ideas en el menor tiempo con la menor cantidad de tinta y espacio.*
+Edward Tufte
+]
+
+- Simplificar! Evitar doble etiquetas, colores innecesarios, etc.
+
+- Graficos reproducibles (no editar a mano al menos que sea imprescindible)
+
+- Entender el tipo de data que estamos gráficando 
+
+- Entender el propósito de cada aesthetics 
+
+---
+## Recursos
+
+- [Fundamentals of data visualization: a primer on making informative and compelling
+figures](https://clauswilke.com/dataviz/), Wilke (2019). Es un libro (libre, entrar al enlace) sobre los fundamentos teóricos de la visuaización de datos (no incluye código, aunque sus ejemplos son hechos en R)
+
+- [Data visualization a practical introduction](https://socviz.co/), Healey (2018). Este libro combina elementos téoricos y prácticos (código en R!)
+
+- [Better data visualizations: A guide for scholars, researchers and wonks](http://cup.columbia.edu/book/better-data-visualizations/9780231193115). Schwabish (2021). Libro con principios de la visualización de datos.
+
+- [The Visual Display of Quantitative Information](edwardtufte.com/tufte/books_vdqi). Tufte (1983). Libro clásico sobre visualización de datos
+
+- [R for Data Science](https://r4ds.had.co.nz/data-visualisation.html). Wickham y Grolemund (2018). Los capítulos 3 y 28 explican cómo crear visualizaciones con ggplot2
+
+- [The R graph gallery](https://www.r-graph-gallery.com/index.html). Es una colección muy completa de visualizaciones de alta calidad hechas en R (usando distintos paquetes).
+
+---
+class: inverse, center, middle
+
+# Gapminder
+
+---
+
+## Gapminder
+
+[Gapminder](https://www.gapminder.org/) es una organización educativa sueca sin fines de lucro que se propone luchar contra percepciones erroneas en economía y salud mediante datos. Existe un paquete de R [Gapminder](https://cran.r-project.org/web/packages/gapminder/README.html) que contiene una base de datos sobre expectativa de vida, población y PBI per capita para muchos países. Es una versión reducida de algunos de los datos utilizados por su fundador Hans Rosling
+
+
+
+```r
+install.packages("gapminder")
+```
+
+.codefont[
+
+```r
+library(gapminder)
+
+glimpse(gapminder)
+```
+
+```
+## Rows: 1,704
+## Columns: 6
+## $ country   &lt;fct&gt; "Afghanistan", "Afghanistan", "Afghanistan", "Afghanistan", ~
+## $ continent &lt;fct&gt; Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, Asia, ~
+## $ year      &lt;int&gt; 1952, 1957, 1962, 1967, 1972, 1977, 1982, 1987, 1992, 1997, ~
+## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8~
+## $ pop       &lt;int&gt; 8425333, 9240934, 10267083, 11537966, 13079460, 14880372, 12~
+## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, ~
+```
+]
+
+---
+class: inverse, center, middle
+
+# R Base
+
+---
+
+## Gráficos con R Base
+
+R Base permite crear gráficos como gráficos de barras, histogramas o gráficos de dispersión. Algunas de las funciones para realizar gráficos con R Base son `hist()`, `plot()` o `barplot()`
+
+.center[
+&lt;img src="resultados/plots/rbase_bar.png" width="400px" /&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Intro a ggplot2
+
+---
+
+## ggplot2
+
+- [ggplot2](https://ggplot2.tidyverse.org/) es uno de los paquetes más utilizados de R para visualizar datos debido a su potencia, elegancia y versatilidad.
+
+- No tiene distintas funciones para distintos gráficos (como en el caso de R Base y la mayoría de los softwares) sino que tiene una grámatica de gráficos. Los distintos componentes independientes pueden ser combinados en un mismo gráfico. 
+
+- Tiene muchos argumentos en común para distintos tipos de gráficos
+
+- ggplot funciona con data en formato tidy!
+
+---
+## ggplot2
+
+- Funciona en capas que se van sumando con `+`. La primera función siempre es `ggplot()`, donde especificamos la data a usar. Esta función solo crea una gráfica vacía.
+
+- ggplot2 contiene varias funciones con las que se pueden ir creando distintos objetos geométricos (que están asociados a tipos de gráficos pero no son excluyentes). Estas se denominan `geom_()`, por ejemplo para gráficos puntos usamos `geom_point()`, para graficar barras `geom_bar()` o `geom_col()` y para graficar líneas `geom_line`, pero estos se pueden combinar también. 
+
+- [Lista](https://ggplot2.tidyverse.org/reference/)  entera de `geoms`
+
+- Dentro de cada `geom` se definen (o al principio dentro de `ggplot()`) los aesthetics usando `aes()`: `x`, `y`, `color`, `fill`, `shape`, etc.
+
+---
+
+## Especificar la data
+
+.codefont[
+
+```r
+library(gapminder)
+
+d_gap_7 &lt;- gapminder %&gt;% 
+  filter(year == 2007)
+
+# Especifico la data a usar
+plot &lt;- ggplot(data = d_gap_7)
+```
+]
+
+.center[
+&lt;img src="ima/plot1.png" width="500px" /&gt;
+]
+
+---
+
+## Asignar aesthetics (x, y)
+.codefont[
+
+```r
+# Asigno las primeras aesthetics (posición: x e y)
+plot &lt;- ggplot(data = d_gap_7, aes(x = gdpPercap, y = lifeExp))
+```
+]
+
+.center[
+&lt;img src="ima/plot2.png" width="600px" /&gt;
+]
+
+---
+
+## Definir primer geom
+.codefont[
+
+```r
+# Agrego con + una segunda capa: geom_point para dispersión
+plot &lt;- ggplot(data = d_gap_7, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+```
+]
+
+.center[
+&lt;img src="ima/plot3.png" width="600px" /&gt;
+]
+
+---
+
+## Settings de un geom  
+.codefont[
+
+```r
+# Asigno atributos de geom_point: color, size, shape
+plot &lt;- ggplot(data = d_gap_7, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(color = "black", fill = "skyblue3", size = 3, shape = 21)
+```
+]
+
+.center[
+&lt;img src="ima/plot4.png" width="600px" /&gt;
+]
+
+
+---
+## Mapping vs setting
+
+- La función `aes()` no solo sirve para asignar posición `(x,y)` sino que también para [otras aesthetics](https://ggplot2.tidyverse.org/reference/aes.html) como tamaño, color, tipo de línea, etc. Sin embargo, cuando definimos esto dentro de `aes()` no nos referimos al color o al tipo de forma específico sino que a la variable por la que agrupamos esas aesthetics. Si específicamos `fill = continent` estamos diciendo que los colores representarán la variable continente. Después podemos especificar el color o la forma para cada grupo. A esto se le llama mapping  (asignar según una variable) 
+
+- .bold[Importante:] si definimos un setting (valor fijo) dentro de `aes()` no funcionará bien. Cuando queremos definir un setting (por ej. `color = "red"` lo hacemos fuera del `aes()`). 
+
+- Dentro del `geom()` podemos especificar los "settings": colores o formas específicas. O con otras funciones como `scale_color_brewer()`
+
+- Por ejemplo, supongamos que queremos crear un gráfico de dispersión donde el tamaño de los puntos refleje el tamaño de población y definir el color rojo para todos ellos:
+
+.codefont[
+
+```r
+ggplot(data = d_gap_7, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(aes(size = pop), color = "red")
+```
+]
+
+---
+
+## Aesthetics por grupo
+.codefont[
+
+```r
+# Asigno color según una variable que agrupa (siempre dentro de aes()!)
+plot &lt;- ggplot(data = d_gap_7,
+               aes(x = gdpPercap, y = lifeExp, fill = continent)) +
+  geom_point(size = 3, shape = 21) 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot5.png" width="600px" /&gt;
+]
+
+
+---
+
+## Otro geom (línea de tendencia)
+.codefont[
+
+```r
+# También puedo crear la línea de tendencia por grupo!
+plot &lt;- ggplot(data = d_gap_7, 
+               aes(x = gdpPercap, y = lifeExp, fill = continent, color = continent)) +
+  geom_point(size = 3, shape = 21) +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot6.png" width="600px" /&gt;
+]
+
+---
+
+## Cambio escala de x
+.codefont[
+
+```r
+# Cambio de escala Probar también xlim()
+plot &lt;- ggplot(data = d_gap_7, 
+               aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(size = 3, alpha = 0.3, color = "skyblue3") +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_x_log10() 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot7.png" width="600px" /&gt;
+]
+
+
+---
+
+## Dividir en facetas
+.codefont[
+
+```r
+# Dividimos en facetas por continente (quitando Oceanía)
+plot &lt;- plot +
+  facet_wrap(~ continent)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot8.png" width="550px" /&gt;
+]
+
+---
+
+## Quitamos etiqueta duplicada
+.codefont[
+
+```r
+# Quitamos etiqueta duplicada
+plot &lt;- plot +
+  theme(legend.position = "none")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot9.png" width="550px" /&gt;
+]
+
+
+---
+
+## Quitamos colores 
+.codefont[
+
+```r
+# Quitamos colores innecesarios
+plot &lt;- ggplot(data = d_gap_7 %&gt;% 
+         filter(continent != "Oceania"), 
+       aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(size = 3, shape = 21,  alpha = .7, fill = "skyblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "navyblue")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot10.png" width="550px" /&gt;
+]
+
+---
+
+## Agregamos una cuarta variable!
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7 %&gt;% 
+         filter(continent != "Oceania"), 
+       aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(aes(size = pop), shape = 21,  alpha = .7, fill = "skyblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "navyblue") +
+  scale_x_log10() 
+  facet_wrap(~ continent) 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot11.png" width="550px" /&gt;
+]
+
+---
+
+## Manipular datos para mejor visualización
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7 %&gt;% filter(continent != "Oceania") %&gt;% 
+         mutate(pop_mil = pop / 1000000), 
+       aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(aes(size = pop_mil), shape = 21,  alpha = .7, fill = "skyblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "navyblue") +
+  scale_x_log10() +
+  facet_wrap(~ continent) +
+  theme(legend.position = "bottom") +
+  scale_size_continuous(name = "Población (en millones)")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot12.png" width="550px" /&gt;
+]
+
+---
+
+## Estética
+.codefontchico[
+
+```r
+plot +
+  labs(title = "PBI per cápita y expectativa de vida",
+       subtitle = "Data de 2017",
+       caption = "Fuente: Gapminder",
+       x = "PBI per cápita",
+       y = "Expectativa de vida") +
+  theme_bw()
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot13.png" width="600px" /&gt;
+]
+
+---
+## Ejercicio
+
+.content-box-blue[
+*Cargar la base nba_data y crear dos gráficos:* 
+
+*(1) un histograma (con R base) de los puntos convertidos por los equipos locales en todos los partidos de la base* 
+
+*(2) un gráfico de dispersión con la relación entre puntos convertidos por el local y puntos convertidos por el visitante  *
+]
+
+
+---
+class: inverse, center, middle
+
+# Aesthetics
+
+---
+## Formas
+
+.center[
+&lt;img src="ima/shapes.png" width="600px" /&gt;
+]
+
+Hay formas duplicadas porque tienen distintas maneras de colorearse. De 0 a 14 las formas se pintan con `color` y se pinta solo el borde. De 15 a 20 se pinta con `color` también pero se rellena la forma y de 20 a 24 pintamos el borde con `color` y el relleno con `fill`
+
+---
+## Formas: definir una forma
+
+.codefont[
+
+```r
+## Definir forma específica
+ggplot(d_gap_7, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(shape = 9)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot14.png" width="600px" /&gt;
+]
+
+---
+## Formas: asignar forma según variable
+
+.codefont[
+
+```r
+## Asignar forma según continente (ggplot elige por defecto formas)
+ggplot(d_gap_7, 
+       aes(x = gdpPercap, y = lifeExp, shape = continent)) +
+  geom_point() +
+  theme(legend.position = "bottom")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot15.png" width="600px" /&gt;
+]
+
+---
+## Formas: definir forma para cada valor de variable
+
+.codefont[
+
+```r
+## Definir manualmente la forma para cada continente
+ggplot(d_gap_7, 
+       aes(x = gdpPercap, y = lifeExp, shape = continent)) +
+  geom_point() +
+  theme(legend.position = "bottom") +
+  scale_shape_manual(name = "Continente",
+                     values = c(15, 16, 17, 18, 19))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot16.png" width="500px" /&gt;
+]
+
+---
+## Formas: definir forma para cada valor de variable
+
+.codefontchico[
+
+```r
+## Definir manualmente la forma para cada continente (otra forma)
+ggplot(d_gap_7, 
+       aes(x = gdpPercap, y = lifeExp, shape = continent)) +
+  geom_point() +
+  theme(legend.position = "bottom") +
+  scale_shape_manual(name = "Continente",
+                     values = c("Europe" = 3,
+                                "Oceania" = 8, 
+                                "Africa" = 12, 
+                                "Asia" = 18, 
+                                "Americas" = 22))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot17.png" width="500px" /&gt;
+]
+
+---
+## Tipos de línea
+
+.center[
+&lt;img src="ima/lineas.png" width="600px" /&gt;
+]
+
+Las llamamos por su nombre:
+
+
+```r
+ggplot(data = data, x = variable1, y = variable2) +
+  geom_line(linetype = "dashed", color="red", size=2)
+```
+---
+## Tipos de línea: según variable
+
+.codefontchico[
+
+```r
+## Lineas por variable
+ggplot(conosur, aes(x = year, y = lifeExp)) +
+  geom_line(aes(linetype = country)) +
+  theme(legend.position = "bottom")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot18.png" width="600px" /&gt;
+]
+
+---
+## Tipos de línea: definir tipo de linea para cada país
+
+.codefontchico[
+
+```r
+## Definir tipo de linea por país
+plot &lt;- ggplot(conosur, aes(x = year, y = lifeExp)) +
+  geom_line(aes(linetype = country)) +
+  theme(legend.position = "bottom") +
+  scale_linetype_manual(name = "País",
+                        values = c("Argentina" = "dotted",
+                                   "Chile" = "dashed",
+                                   "Uruguay" = "solid"))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot19.png" width="600px" /&gt;
+]
+
+---
+## Tipos de línea: definir tipo de línea para cada país
+
+.codefontchico[
+
+```r
+## Definir tipo de linea por país
+plot +
+  geom_point(aes(shape = country)) +
+  labs(linetype = "País", shape = "País")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot20.png" width="600px" /&gt;
+]
+
+---
+## Colores
+
+R tiene muchos colores definidos, además de que permite utilizar [hexcolors](https://htmlcolorcodes.com/es/). Con  `colors()` pueden ver una lista con ellos. Pueden consultar otra lista ampliada de colores [acá](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf?utm_source=twitterfeed&amp;utm_medium=twitter). [R graph gallery](https://www.r-graph-gallery.com/ggplot2-color.html) tiene una sección para aplicar distintos colores fácilmente. Algunos de los colores predeterminados (podemos llamarlos por su nombre, siempre entre paréntesis):
+
+.center[
+&lt;img src="ima/colores_lindos.png" width="500px" /&gt;
+]
+
+---
+## Paletas de colores
+
+En muchas visualizaciones no utilizamos un solo color sino que conjuntos de colores, o paletas. Distintas paletas sirven para distintos tipos de datos. El paquete [RColorBrewer](https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html) contiene las paletas más utilizadas. Hay tres tipos de paletas: 
+
+- Secuenciales: para data ordenada (van de colores más claros a oscuros, dentro de una misma tonalidad)
+
+- Divergentes: para data ordenada (los colores claros están en el medio y hacia los extremos toman tonalidades divergentes)
+
+- Cualitativas: para data no ordenada, simplemente distintos colores que se asignan a distintas clases, sin orden.
+
+A su vez, el paquete [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) tiene paletas continuas y discretas con combinaciones de colores que permiten resaltar datos distintos, que no causan problemas en personas con daltonismo y que se imprimen bien en escala de grises.
+
+Ambos paquetes se integran muy bien con ggplot a través de distintas funciones como `scale_color_brewer()` o `scale_color_viridis()`
+---
+## Paletas de colores
+
+.center[
+&lt;img src="ima/rcolor_brewer.png" width="600px" /&gt;
+]
+
+---
+## Colores: por variable
+
+.codefontchico[
+
+```r
+## Color por país (ggplot elige automático)
+ggplot(conosur, aes(x = year, y = lifeExp, color = country)) +
+  geom_line() +
+  geom_point() +
+  theme(legend.position = "bottom")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot21.png" width="600px" /&gt;
+]
+
+---
+## Colores: asignar colores manualmente
+
+.codefontchico[
+
+```r
+## Color por país (asigno colores manualmente)
+ggplot(conosur, aes(x = year, y = lifeExp, color = country)) +
+  geom_line() +
+  geom_point() +
+  theme(legend.position = "bottom") +
+  scale_color_manual(name = "País",
+                     values = c("midnightblue", "red3", "lightskyblue"))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot22.png" width="600px" /&gt;
+]
+
+
+---
+## Colores: detalles estéticos
+
+.codefontchico[
+
+```r
+## Color por país (otros detalles estéticos)
+ggplot(conosur, aes(x = year, y = lifeExp, color = country)) +
+  geom_line(size = 1.5, alpha = 0.4) +
+  geom_point(size = 3) +
+  theme(legend.position = "bottom") +
+  scale_color_manual(name = "País",
+                     values = c("midnightblue", "red3", "lightskyblue"))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot23.png" width="600px" /&gt;
+]
+
+---
+## Colores: asignar colores con paleta de RColorBrewer
+
+.codefontchico[
+
+```r
+## Color por país (usando paletas de RColorBrewer: elegir una discreta para este caso)
+ggplot(conosur, aes(x = year, y = lifeExp, color = country)) +
+  geom_line(size = 1.5, alpha = 0.4) +
+  geom_point(size = 3) +
+  theme(legend.position = "bottom") +
+  scale_color_brewer(palette = "Dark2")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot24.png" width="600px" /&gt;
+]
+
+---
+## Colores: paletas continuas
+
+.codefontchico[
+
+```r
+## Color con paleta continua con paquete viridis 
+ggplot(d_gap_7, aes(x = pop, y = gdpPercap, color = lifeExp)) +
+  geom_point(size = 3) +
+  scale_x_log10() +
+  scale_color_viridis(name = "Expectativa de vida") +
+  theme(legend.position = "bottom") 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot25.png" width="600px" /&gt;
+]
+
+---
+## Colores: paletas continuas
+
+.codefontchico[
+
+```r
+## Color con paleta continua especificando valores
+ggplot(d_gap_7, aes(x = pop, y = gdpPercap, color = lifeExp)) +
+  geom_point(size = 3) +
+  scale_x_log10() +
+  scale_color_gradient(name = "Expectativa de vida", low = "red", high = "Blue") +
+  theme(legend.position = "bottom") 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot26.png" width="600px" /&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Tipos de geoms
+
+---
+## geom_bar()
+
+- ggplot2 cuenta con dos geoms para hacer gráficos de barras `geom_bar()` y `geom_col()`
+
+-  Cuando usamos `geom_bar()`  tenemos que tener en cuenta dos argumentos clave: `stat` (nivel de agregación de la variable: count, proporción, etc.) y `position` (posición en la que se desplegan las categorías: apiladas, separadas, etc.)
+
+- Por defecto  `geom_bar()` grafica la cantidad de observaciones de cada valor de `x` (no necesita argumento `y`). Sin embargo, si ya tenemos una tabla resumida podemos ajustarlo con `stat = identity`, especificando un valor `y` o usando `geom_col()`
+
+---
+## geom_bar()
+
+.codefontchico[
+
+```r
+table(d_gap_7$continent) # solo data de 2007 (gapminder)
+## Graficar cuántos países hay por continente en nuestra base
+ggplot(data = d_gap_7, aes(x = continent)) +
+  geom_bar()
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot27.png" width="600px" /&gt;
+]
+
+---
+## geom_bar(): 
+
+Por defecto no funciona con datos resumidos 
+
+.codefontchico[
+
+```r
+## Con datos resumidos
+data_resumen &lt;- d_gap_7 %&gt;% 
+  group_by(continent) %&gt;% 
+  summarize(n = n())
+ggplot(data_resumen, aes(x = continent)) +
+  geom_bar()
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot28.png" width="500px" /&gt;
+]
+
+---
+## geom_col(): 
+
+Para eso podemos usar `geom_col()`, especificando cuál es la columna con el valor con el argumento `y`
+
+.codefontchico[
+
+```r
+## Con datos resumidos
+data_resumen &lt;- d_gap_7 %&gt;% 
+  group_by(continent) %&gt;% 
+  summarize(n = n())
+
+ggplot(data_resumen, aes(x = continent, y = n)) +
+  geom_col()
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot28_b.png" width="500px" /&gt;
+]
+
+---
+## geom_bar(): con datos resumidos
+
+.codefontchico[
+
+```r
+# Especificamos el argumento stat = identity para trabajar con datos resumidos
+ggplot(data_resumen, aes(x = continent, y = n)) +
+  geom_bar(stat = "identity")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot29.png" width="600px" /&gt;
+]
+
+---
+## geom_bar(): proporciones
+
+.codefontchico[
+
+```r
+ggplot(d_gap_7, aes(x = continent)) +
+  geom_bar(aes(y = ..prop.., group = 1))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot30.png" width="600px" /&gt;
+]
+
+---
+## geom_bar(): barras por variable
+
+.codefontchico[
+
+```r
+data75 &lt;- d_gap_7 %&gt;% 
+  mutate(esp = case_when(lifeExp &gt; 75 ~ 1,
+                         TRUE ~ 0)) %&gt;% 
+  group_by(continent, esp) %&gt;% 
+  summarize(n = n())
+
+ggplot(data75, aes(x = continent, y = n, fill = as.factor(esp))) +
+  geom_bar(stat = "identity", position = "stack") # posicion por defecto
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot31.png" width="600px" /&gt;
+]
+
+---
+## geom_bar(): barras agrupadas
+
+.codefontchico[
+
+```r
+## Podemos jugar con la posición: 
+# Barras agrupadas
+ggplot(data75, aes(x = continent, y = n, fill = as.factor(esp))) +
+  geom_bar(stat = "identity", position = "dodge")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot32.png" width="600px" /&gt;
+]
+
+---
+## geom_bar(): barras apiladas por proporción
+
+.codefontchico[
+
+```r
+# Barras proporción
+ggplot(data75, aes(x = continent, y = n, fill = as.factor(esp))) +
+  geom_bar(stat = "identity", position = "fill")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot33.png" width="600px" /&gt;
+]
+
+---
+## geom_bar(): estética
+
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7, aes(x = continent)) +
+  geom_bar(color = "black", fill = "skyblue3", alpha = .8) +
+  labs(title = "Cantidad de países por continente",
+       subtitle = "Data de Gapminder para el año 2007",
+       caption = "Fuente: Gapminder",
+       x = "", y = "")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot34.png" width="600px" /&gt;
+]
+---
+## geom_bar(): girar
+
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7, aes(x = continent)) +
+  geom_bar(color = "black", fill = "skyblue3", alpha = .8) +
+  labs(title = "Cantidad de países por continente",
+       subtitle = "Data de Gapminder para el año 2007",
+       caption = "Fuente: Gapminder",
+       x = "", y = "") +
+  cord_flip()
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot35.png" width="500px" /&gt;
+]
+
+---
+## geom_bar(): ordenar categorías manualmente
+
+.codefontchico[
+
+```r
+positions &lt;- c("Americas", "Europe", "Africa", "Oceania", "Asia")
+
+ggplot(data = d_gap_7, aes(x = continent)) +
+  geom_bar(color = "black", fill = "skyblue3", alpha = .8) +
+  labs(title = "Cantidad de países por continente",
+       subtitle = "Data de Gapminder para el año 2007",
+       caption = "Fuente: Gapminder",
+       x = "", y = "") +
+  scale_x_discrete(limits = positions)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot36.png" width="500px" /&gt;
+]
+
+---
+## geom_bar(): ordenar categorías según frecuencia
+
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7, aes(x = fct_infreq(continent))) +
+  geom_bar(color = "black", fill = "skyblue3", alpha = .8) +
+  labs(title = "Cantidad de países por continente",
+       subtitle = "Data de Gapminder para el año 2007",
+       caption = "Fuente: Gapminder",
+       x = "", y = "")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot37.png" width="600px" /&gt;
+]
+
+---
+## geom_text()
+
+Permite incluir texto en los gráficos, ver también `annotate()` y `geom_label()`. Como cualquier geom, se puede utilizar solo o combinado. Supongamos que queremos agregar etiquetas al siguiente gráfico:
+
+.codefontchico[
+
+```r
+lista_a_sur &lt;- c("Argentina", "Brazil", "Bolivia", "Chile", "Colombia", 
+                 "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela")
+
+a_sur &lt;- gapminder %&gt;% 
+  filter(year == 2007 &amp; country %in% lista_a_sur)
+
+## Gráfico de dispersión expectativa de vida y pbi per cápita
+ggplot(a_sur, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot38.png" width="400px" /&gt;
+]
+
+---
+## geom_text()
+
+.codefontchico[
+
+```r
+# Agregar etiquetas
+ggplot(a_sur, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() +
+  geom_text(aes(label = country))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot39.png" width="600px" /&gt;
+]
+
+---
+## geom_text(): posición 
+
+.codefontchico[
+
+```r
+# Podemos ajustar la posición de las etiquetas
+ggplot(a_sur, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() +
+  geom_text(aes(label = country), hjust = 0.5, vjust = -1)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot40.png" width="600px" /&gt;
+]
+
+---
+## geom_text(): solo texto
+
+.codefontchico[
+
+```r
+# Podemos también dejar solo el texto
+ggplot(a_sur, aes(x = gdpPercap, y = lifeExp)) +
+  geom_text(aes(label = country))
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot41.png" width="600px" /&gt;
+]
+
+---
+## geom_text(): etiquetas en otros gráficos
+
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7, aes(x = fct_infreq(continent))) +
+  geom_bar(color = "black", fill = "skyblue3", alpha = .8) +
+  geom_text(aes(label = ..count..), stat = "count", vjust = -.5, fontface = "bold") +
+  labs(title = "Cantidad de países por continente",
+       subtitle = "Data de Gapminder para el año 2007",
+       caption = "Fuente: Gapminder",
+       x = "",
+       y = "") 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot42.png" width="600px" /&gt;
+]
+
+---
+## anotate(): texto en gráfico
+
+.codefontchico[
+
+```r
+ggplot(data = d_gap_7, aes(x = fct_infreq(continent))) +
+  geom_bar(color = "black", fill = "skyblue3", alpha = .8) +
+  geom_text(aes(label = ..count..), stat = "count", vjust = -.5, fontface = "bold") +
+  labs(title = "Cantidad de países por continente",
+       subtitle = "Data de Gapminder para el año 2007",
+       caption = "Fuente: Gapminder",
+       x = "",
+       y = "") +
+    annotate("text", x = "Oceania", y = 10, label = "Que pocos países \n hay en Oceanía")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot43.png" width="600px" /&gt;
+]
+
+---
+## geom_boxplot()
+
+.codefontchico[
+
+```r
+## Boxplot tradicional
+d_gap_7 %&gt;%
+  filter(continent != "Oceania") %&gt;% 
+  ggplot(aes(x = continent, y = gdpPercap)) +
+  geom_boxplot() +
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot44.png" width="600px" /&gt;
+]
+
+
+---
+## geom_boxplot() y geom_jitter()
+
+.codefontchico[
+
+```r
+# Boxplot con todos los puntos con geom_jitter()
+d_gap_7 %&gt;%
+  filter(continent != "Oceania") %&gt;% 
+  ggplot(aes(x = continent, y = gdpPercap)) +
+  geom_boxplot(aes(fill = continent), outlier.shape = NA, lwd=1, alpha=0.4) +
+  geom_jitter(aes(color = continent), size = 4, alpha = 0.9) +
+  scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "none")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot45.png" width="500px" /&gt;
+]
+
+---
+
+## geom_density()
+
+.codefontchico[
+
+```r
+## Distribución del PBI per cápita en 2007
+ggplot(d_gap_7, aes(x = gdpPercap)) +
+  geom_density() 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot46.png" width="600px" /&gt;
+]
+
+---
+
+## geom_density()
+
+.codefontchico[
+
+```r
+# Agregamos colores
+ggplot(d_gap_7, aes(x = gdpPercap)) +
+  geom_density(fill = "seagreen3", alpha = .7) 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot47.png" width="600px" /&gt;
+]
+
+
+---
+  
+## geom_density()
+  
+.codefontchico[
+
+```r
+# Desagregar por continente
+d_gap_7 %&gt;%
+  filter(continent != "Oceania") %&gt;%
+  ggplot(aes(x = gdpPercap, fill = continent)) +
+  geom_density( alpha = .7, adjust = 1.5) +
+  scale_fill_brewer(palette = "Accent") +
+  facet_wrap(~ continent)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot48.png" width="500px" /&gt;
+]
+
+---
+  
+---
+## ggridges
+  
+.pull-left[
+.codefontchico[
+
+```r
+# Densidades segun variable en el mismo eje
+library(ggridges)
+ggplot(gapminder, 
+       aes(x = lifeExp, y = as.factor(year))) + 
+    geom_density_ridges(fill = "lightblue") +
+    labs(title = "Distribución de expectativa de vida por año",
+       caption = "Data: Gapminder",
+       x = "", y = "")
+```
+]
+]
+
+.pull-right[
+.center[
+&lt;img src="resultados/plots/plot49.png" width="400px" /&gt;
+]
+]
+
+---
+## ggridges
+  
+
+.codefontchico[
+
+```r
+# Agrego facetas
+gapminder %&gt;%
+  filter(continent == "Africa" | continent == "Europe") %&gt;% 
+  ggplot(aes(x = lifeExp, y = as.factor(year))) + 
+  geom_density_ridges(fill = "lightblue") +
+  facet_wrap(~ continent, nrow = 1) +
+    labs(title = "Distribución de expectativa de vida por año en Africa y Europa",
+       caption = "Data: Gapminder",
+       x = "", y = "")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot50.png" width="400px" /&gt;
+]
+
+---
+
+## ggridges
+  
+.pull-left[
+.codefontchico[
+
+```r
+# Densidades en el mismo eje
+# Agrego la media con quantiles_ines y quantiles_fun!
+gapminder %&gt;% 
+  filter(continent == "Africa" |
+           continent == "Asia") %&gt;% 
+  ggplot(aes(x = lifeExp, 
+             y = as.factor(year),
+             fill = continent)) + 
+  geom_density_ridges(alpha = .6) +
+  scale_fill_manual(name = "Continente",
+                    values = c("red3", 
+                               "lightblue")) +
+    labs(title = "Distribución de expectativa de vida por año en África y Asia",
+       caption = "Data: Gapminder",
+       x = "", y = "") 
+```
+]
+]
+
+.pull-right[
+.center[
+&lt;img src="resultados/plots/plot51.png" width="400px" /&gt;
+]
+]
+---
+
+class: inverse, center, middle
+
+# Gráficos animados
+
+---
+
+## Gráficos animados
+
+Con el paquete gganimate podemos crear graficos animados y luego exportarlos como `.gifs`. Supongamos que queremos mostrar la evolución de la expectativa de vda y del PBI per cápita por país usando los datos de Gapminder
+
+.pull-left[
+.codefontchico[
+
+```r
+d_gap &lt;- (gapminder)
+
+# Primero podríamos crear un gráfico tradicional 
+p_static &lt;- ggplot(d_gap, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
+  geom_point(aes(size = pop), alpha = 0.7) +
+  scale_size(range = c(2, 12)) +
+  scale_color_brewer(palette = "Dark2") +
+  scale_x_log10() + guides(size = FALSE) +
+  labs(x = "PBI per capita", y = "Expectativa de vida") +
+  theme(legend.position = "bottom") 
+p_static
+```
+]
+]
+
+.pull-right[
+.center[
+&lt;img src="resultados/plots/static1.png" width="400px" /&gt;
+]
+]
+---
+## Gráficos animados
+
+
+
+```r
+p_static_facet &lt;- p_static +
+  facet_wrap(~ year)
+```
+
+.center[
+&lt;img src="resultados/plots/static2.png" width="350px" /&gt;
+]
+
+---
+## Gráficos animados
+
+
+```r
+p_ani &lt;- p_static + 
+  transition_time(year) +
+  labs(title = "Año: {frame_time}")
+```
+
+.center[
+&lt;img src="resultados/plots/anim_1.gif" width="450px" /&gt;
+]
+
+---
+## Gráficos animados
+
+
+```r
+p_ani_2 &lt;- p_ani + 
+  shadow_wake(wake_length = 0.1, alpha = FALSE) # Agregamos sombra
+```
+
+.center[
+&lt;img src="resultados/plots/anim_2.gif" width="500px" /&gt;
+]
+
+---
+## Gráficos animados
+
+.codefontchico[
+
+```r
+# Identificamos países por color
+d_gap &lt;- gapminder %&gt;% 
+  mutate(etiqueta = case_when(
+    country == "Argentina" ~ "Argentina",
+    country == "Uruguay" ~ "Uruguay",
+    country == "Chile" ~ "Chile",
+    country == "Brazil" ~ "Brazil",
+    country == "Costa Rica" ~ "Costa Rica",
+    country == "Colombia" ~ "Colombia",
+    country == "Italy" ~ "Italy",
+    country == "Spain" ~ "Spain",
+    TRUE ~ "Otros países"
+  ))
+p_static_2 &lt;- ggplot(d_gap, 
+                   aes(x = gdpPercap, y = lifeExp, colour = etiqueta)) +
+  geom_point(aes(size = pop), alpha = 0.7) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  guides(size = FALSE) +
+  labs(x = "PBI per capita", y = "Expectativa de vida") +
+  theme(legend.position = "bottom") +
+  scale_color_manual(name = "País",
+                     values = c("Argentina" = "dodgerblue3",
+                                "Uruguay" = "skyblue",
+                                "Chile" = "brown1",
+                                "Brazil" = "chartreuse4",
+                                "Costa Rica" = "brown4",
+                                "Colombia" = "gold2",
+                                "Italy" = "palegreen2",
+                                "Spain" = "goldenrod4", 
+                                "Otros países" = adjustcolor("gray72", alpha.f = .5)))
+```
+]
+
+
+---
+## Gráficos animados
+
+.codefont[
+
+```r
+p_ani_3 &lt;- p_static_2 + 
+  transition_time(year) +
+  labs(title = "Año: {frame_time}") +
+  shadow_mark(alpha = 0.3, size = 0.5)
+```
+]
+
+.center[
+&lt;img src="resultados/plots/anim_3.gif" width="400px" /&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Estadística inferencial y visualización
+
+---
+
+## OPUY
+
+[opuy](https://github.com/Nicolas-Schmidt/opuy) es un paquete que cuenta con data de aprobación del presidente en Uruguay. La data de opuy también está en la carpeta data. 
+
+.codefont[
+
+```r
+library(opuy)
+
+data &lt;- opuy %&gt;% 
+  filter(medicion == "Evaluacion de gestion presidente",
+         categoria == "Aprueba") %&gt;% 
+  select(fecha, empresa, presidente, valor) %&gt;% 
+  rename(aprobacion = valor) %&gt;% 
+  arrange(fecha)
+
+data
+```
+
+```
+## # A tibble: 268 x 4
+##    fecha      empresa presidente aprobacion
+##    &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+##  1 1990-08-13 Equipos Lacalle          18  
+##  2 1990-11-17 Equipos Lacalle          14  
+##  3 1991-07-31 Equipos Lacalle          17  
+##  4 1991-12-06 Equipos Lacalle          14  
+##  5 1992-04-12 Equipos Lacalle          13  
+##  6 1992-08-18 Equipos Lacalle          11  
+##  7 1992-11-22 Equipos Lacalle          14  
+##  8 1993-02-26 Equipos Lacalle          18  
+##  9 1993-04-01 Equipos Lacalle          12.9
+## 10 1993-06-02 Equipos Lacalle          15.1
+## # ... with 258 more rows
+```
+]
+
+---
+## Intervalos de confianza con geom_errorbar()
+  
+R tiene muchas funciones para realizar estadística inferencial. En el caso de los intervalos de confianza -entre otras opciones- podemos calcularlos manualmente o con la función `summarySE()` del paquete Rmisc. 
+
+
+.codefont[
+
+```r
+## Defino valor crítico con qnorm()
+valor_critico &lt;- qnorm(0.975)
+  
+# Calcular manualmente
+data_resumen &lt;- data %&gt;% 
+  group_by(presidente) %&gt;% 
+  summarize(
+    mean = mean(aprobacion),
+    sd = sd(aprobacion),
+    ci = valor_critico * (sd(aprobacion) / sqrt(n())),
+    ci_low =  mean(aprobacion) - valor_critico * (sd(aprobacion) / sqrt(n())),
+    ci_up =  mean(aprobacion) + valor_critico * (sd(aprobacion) / sqrt(n()))
+    )
+
+data_resumen
+```
+
+```
+## # A tibble: 7 x 6
+##   presidente     mean    sd    ci ci_low ci_up
+##   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 Batlle         30.0 16.3   5.32   24.7  35.3
+## 2 Lacalle        19.4  6.01  2.36   17.1  21.8
+## 3 Lacalle Pou    58    4.62  1.81   56.2  59.8
+## 4 Mujica         49.3  9.78  2.92   46.4  52.2
+## 5 Sanguinetti 2  26.5  3.96  1.10   25.4  27.6
+## 6 Vazquez 1      51.8  7.57  2.12   49.7  53.9
+## 7 Vazquez 2      36.1 10.3   3.19   32.9  39.3
+```
+]
+
+---
+## Graficar intervalos de confianza
+
+Para graficar intervalos de confianza primero debemos calcularlos. Podemos utilizar funciones (ej. `summarySE()` de Rmisc) o calcularlos de forma manual. 
+
+.codefont[
+
+```r
+# Con summarySE() de Rmisc
+data_resumen_2 &lt;- Rmisc::summarySE(data,
+                                   measurevar = "aprobacion",
+                                   conf.interval = 0.95,
+                                   na.rm = TRUE,
+                                   groupvars = "presidente") 
+data_resumen_2
+```
+
+```
+##      presidente  N aprobacion        sd        se       ci
+## 1        Batlle 36   30.02402 16.296445 2.7160741 5.513924
+## 2       Lacalle 25   19.42780  6.009845 1.2019690 2.480742
+## 3   Lacalle Pou 25   58.00000  4.618802 0.9237604 1.906548
+## 4        Mujica 43   49.30233  9.777367 1.4910344 3.009029
+## 5 Sanguinetti 2 50   26.54415  3.956578 0.5595447 1.124447
+## 6     Vazquez 1 49   51.79592  7.574573 1.0820818 2.175671
+## 7     Vazquez 2 40   36.12500 10.278650 1.6251972 3.287272
+```
+]
+
+---
+## Intervalos de confianza con geom_errorbar()
+  
+.codefontchico[
+
+```r
+# Grafico resultados con ggplot2
+ggplot(data_resumen, aes(x = fct_reorder(presidente, -mean), y = mean)) +
+  geom_errorbar(aes(ymin = ci_low, ymax = ci_up), colour="black", width=.1) +
+  geom_point(size=3) +
+  labs(title = "Aprobación de presidente por administración",
+       caption = "Fuente: OPUY",
+       x = "",
+       y = "") 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot52.png" width="500px" /&gt;
+]
+
+---
+## Gráficos con desvío estandar con geom_errorbar()
+  
+.codefontchico[
+
+```r
+# Grafico resultados con ggplot2
+ggplot(data_resumen, aes(x = fct_reorder(presidente, -mean), y = mean)) +
+  geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), colour="black", width=.1) +
+  geom_point(size=3) +
+  labs(title = "Aprobación de presidente por administración",
+       caption = "Fuente: OPUY",
+       x = "",
+       y = "") 
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot52_b.png" width="500px" /&gt;
+]
+
+---
+## Intervalos de confianza con geom_errorbar()
+  
+.pull-left[
+.codefontchico[
+
+```r
+# Grafico resultados con ggplot2
+# Intervalo de confianza con barras
+ggplot(data_resumen, 
+       aes(x = fct_reorder(presidente, -mean),
+           y = mean)) + 
+  geom_bar(aes(fill = presidente), 
+           stat = "identity", alpha = .75, 
+           color = "black") +
+  geom_errorbar(aes(ymin = ci_low, ymax = ci_up), 
+                colour = "black",
+                width = .1, size = 1) +
+  labs(title = "Aprobación de presidente por administración",
+       caption = "Fuente: OPUY",
+       x = "", y = "") +
+  scale_fill_manual(values = c(
+    "Lacalle Pou" = "lightblue",
+    "Vazquez 1" = "midnightblue",
+    "Mujica" = "midnightblue", 
+    "Vazquez 2" = "midnightblue",
+    "Batlle" = "firebrick3",
+    "Sanguinetti 2" = "firebrick3", 
+    "Lacalle" = "lightblue")) +
+  theme(legend.position = "none")
+```
+]
+]
+
+.pull-right[
+.center[
+&lt;img src="resultados/plots/plot53.png" width="400px" /&gt;
+]
+]
+
+---
+## Modelos de regresión lineal
+
+R trae un conjunto de funciones para estimar modelos de regresión. `lm()` sirve para estimar una regresión lineal. El primer argumento es la variable dependiente, luego `~` seguido de las variables independientes separadas por `+`, luego en el argumento data especificamos el dataframe a utilizar:
+
+
+```r
+reg &lt;- lm(var_dependiente ~ var_ind_1 + var_ind2, data = mi_data)
+
+summary(reg) # Con summary podemos ver los resultados
+```
+
+---
+
+## Modelos de regresión
+
+Volvamos a la data de gapminder y estimemos un modelo de regresión cuya variable dependiente sea expectativa de vida y las variables independientes el PBI per cápita. 
+
+.codefontchico[
+
+```r
+reg &lt;- lm(lifeExp ~ gdpPercap + pop + year + continent, data = gapminder)
+
+summary(reg) # Con summary podemos ver los resultados
+```
+
+```
+## 
+## Call:
+## lm(formula = lifeExp ~ gdpPercap + pop + year + continent, data = gapminder)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -28.4051  -4.0550   0.2317   4.5073  20.0217 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -5.185e+02  1.989e+01 -26.062   &lt;2e-16 ***
+## gdpPercap          2.985e-04  2.002e-05  14.908   &lt;2e-16 ***
+## pop                1.791e-09  1.634e-09   1.096    0.273    
+## year               2.863e-01  1.006e-02  28.469   &lt;2e-16 ***
+## continentAmericas  1.429e+01  4.946e-01  28.898   &lt;2e-16 ***
+## continentAsia      9.375e+00  4.719e-01  19.869   &lt;2e-16 ***
+## continentEurope    1.936e+01  5.182e-01  37.361   &lt;2e-16 ***
+## continentOceania   2.056e+01  1.469e+00  13.995   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 6.883 on 1696 degrees of freedom
+## Multiple R-squared:  0.7172,	Adjusted R-squared:  0.716 
+## F-statistic: 614.5 on 7 and 1696 DF,  p-value: &lt; 2.2e-16
+```
+]
+
+
+---
+## Modelos de regresión generalizados
+
+Con `glm()` podemos estimar otros modelos como probit, poisson o logit. `glm()` tiene la misma lógica que `lm()` solo que especificamos el tipo de modelo mediante el argumento [family](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/family.html) y cuando es necesario una especificación adicional con el argumento link
+
+
+```r
+# Logit
+reg &lt;- glm(var_dependiente ~ var_ind_1 + var_ind2, 
+           data = mi_data,
+           family = binomial(link = "logit"))
+
+# Probit
+reg &lt;- glm(var_dependiente ~ var_ind_1 + var_ind2, 
+           data = mi_data,
+           family = binomial(link = "probit"))
+           
+# Poisson
+reg &lt;- glm(var_dependiente ~ var_ind_1 + var_ind2, 
+           data = mi_data,
+           family = "poisson")
+```
+
+---
+## Regresión logística
+
+Ahora creemos una nueva variable de expectativa de vida que sea binaria y estimemos una regresión logística. La variable tendrá valor 1 cuando la expectativa de vida sea mayor a 70 y 0 si no lo es. 
+
+
+```r
+# Creo nueva variable
+gapminder &lt;- mutate(gapminder, 
+                    lifeExp_rec = case_when(lifeExp &gt; 70 ~ 1,
+                                            TRUE ~ 0)
+                    )
+
+# Por más que tenga solo dos valores, es numérica
+class(gapminder$lifeExp_rec)
+```
+
+```
+## [1] "numeric"
+```
+
+```r
+# Para esto debo transformarla a factor
+gapminder &lt;- mutate(gapminder,
+                    lifeExp_rec = as.factor(lifeExp_rec))
+
+class(gapminder$lifeExp_rec)
+```
+
+```
+## [1] "factor"
+```
+
+---
+## Regresión logística
+
+.codefontchico[
+
+```r
+reg_logit &lt;- glm(lifeExp_rec ~ gdpPercap + pop + year + continent,
+                 data = gapminder,
+                 family = binomial(link = "logit"))
+summary(reg_logit)
+```
+
+```
+## 
+## Call:
+## glm(formula = lifeExp_rec ~ gdpPercap + pop + year + continent, 
+##     family = binomial(link = "logit"), data = gapminder)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.3649  -0.3727  -0.1272   0.1175   2.6974  
+## 
+## Coefficients:
+##                     Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       -2.052e+02  1.486e+01 -13.808  &lt; 2e-16 ***
+## gdpPercap          1.221e-04  1.431e-05   8.534  &lt; 2e-16 ***
+## pop                1.520e-10  6.416e-10   0.237    0.813    
+## year               1.011e-01  7.434e-03  13.604  &lt; 2e-16 ***
+## continentAmericas  3.010e+00  3.073e-01   9.795  &lt; 2e-16 ***
+## continentAsia      1.951e+00  3.088e-01   6.317 2.67e-10 ***
+## continentEurope    5.221e+00  3.745e-01  13.941  &lt; 2e-16 ***
+## continentOceania   6.911e+00  9.175e-01   7.532 4.98e-14 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2050.05  on 1703  degrees of freedom
+## Residual deviance:  869.98  on 1696  degrees of freedom
+## AIC: 885.98
+## 
+## Number of Fisher Scoring iterations: 6
+```
+]
+
+---
+## Regresión logística
+
+Cambiar categoría de referencia de un factor
+
+.codefontchico[
+
+```r
+gapminder &lt;- mutate(gapminder,
+                    continent = relevel(continent, ref = "Americas"))
+
+reg_logit_2 &lt;- glm(lifeExp_rec ~ gdpPercap + pop + year + continent,
+                 family = binomial(link = "logit"),
+                 data = gapminder)
+
+summary(reg_logit_2)
+```
+
+```
+## 
+## Call:
+## glm(formula = lifeExp_rec ~ gdpPercap + pop + year + continent, 
+##     family = binomial(link = "logit"), data = gapminder)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.3649  -0.3727  -0.1272   0.1175   2.6974  
+## 
+## Coefficients:
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)      -2.022e+02  1.477e+01 -13.686  &lt; 2e-16 ***
+## gdpPercap         1.221e-04  1.431e-05   8.534  &lt; 2e-16 ***
+## pop               1.520e-10  6.416e-10   0.237    0.813    
+## year              1.011e-01  7.434e-03  13.604  &lt; 2e-16 ***
+## continentAfrica  -3.010e+00  3.073e-01  -9.795  &lt; 2e-16 ***
+## continentAsia    -1.059e+00  2.374e-01  -4.463 8.10e-06 ***
+## continentEurope   2.211e+00  2.667e-01   8.291  &lt; 2e-16 ***
+## continentOceania  3.901e+00  8.704e-01   4.482 7.41e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2050.05  on 1703  degrees of freedom
+## Residual deviance:  869.98  on 1696  degrees of freedom
+## AIC: 885.98
+## 
+## Number of Fisher Scoring iterations: 6
+```
+]
+
+---
+
+## Modelos de regresión 
+
+Para analizar mejor los resultados de nuestros modelos podemos utilizar el paquete [broom](https://broom.tidymodels.org/). La función `tidy()`, por ejemplo, nos permite extraer los resultados del modelo en un dataframe en formato tidy
+
+.codefont[
+
+```r
+library(broom)
+
+coef &lt;- tidy(reg, conf.int = TRUE) 
+
+print(coef)
+```
+
+```
+## # A tibble: 8 x 7
+##   term              estimate std.error statistic   p.value conf.low conf.high
+##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)       -5.18e+2   1.99e+1    -26.1  3.25e-126 -5.57e+2  -4.79e+2
+## 2 gdpPercap          2.98e-4   2.00e-5     14.9  2.52e- 47  2.59e-4   3.38e-4
+## 3 pop                1.79e-9   1.63e-9      1.10 2.73e-  1 -1.41e-9   5.00e-9
+## 4 year               2.86e-1   1.01e-2     28.5  4.80e-146  2.67e-1   3.06e-1
+## 5 continentAmericas  1.43e+1   4.95e-1     28.9  1.18e-149  1.33e+1   1.53e+1
+## 6 continentAsia      9.38e+0   4.72e-1     19.9  3.80e- 79  8.45e+0   1.03e+1
+## 7 continentEurope    1.94e+1   5.18e-1     37.4  2.03e-223  1.83e+1   2.04e+1
+## 8 continentOceania   2.06e+1   1.47e+0     14.0  3.39e- 42  1.77e+1   2.34e+1
+```
+]
+
+---
+
+## Modelos de regresión 
+
+ Uso `mutate_if()` para redondear todas las variables numéricas, para utilizar mutate para varias columnas al mismo tiempo [ver](https://dplyr.tidyverse.org/reference/mutate_all.html)
+ 
+.codefont[
+
+```r
+# También para la regresión logística
+
+coef_log2 &lt;- tidy(reg_logit_2, conf.int = TRUE) %&gt;%
+    mutate_if(is.numeric, ~ round(., 4))
+
+print(coef_log2)
+```
+
+```
+## # A tibble: 8 x 7
+##   term              estimate std.error statistic p.value  conf.low conf.high
+##   &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)      -202.       14.8      -13.7     0     -232.     -174.    
+## 2 gdpPercap           0.0001    0          8.53    0        0.0001    0.0002
+## 3 pop                 0         0          0.237   0.813    0         0     
+## 4 year                0.101     0.0074    13.6     0        0.087     0.116 
+## 5 continentAfrica    -3.01      0.307     -9.79    0       -3.64     -2.43  
+## 6 continentAsia      -1.06      0.237     -4.46    0       -1.53     -0.598 
+## 7 continentEurope     2.21      0.267      8.29    0        1.70      2.75  
+## 8 continentOceania    3.90      0.870      4.48    0        2.35      5.90
+```
+]
+
+---
+
+## Modelos de regresión 
+
+Si utilizamos fijamos `exponentiate = TRUE` dentro de `tidy()` en una regresión logística obtenemos los odds ratios
+
+.codefont[
+
+```r
+coef_log3 &lt;- tidy(reg_logit_2, 
+                  exponentiate = TRUE,
+                  conf.int = TRUE) %&gt;%
+    mutate_if(is.numeric, ~ round(., 5))
+
+print(coef_log3)
+```
+
+```
+## # A tibble: 8 x 7
+##   term             estimate std.error statistic p.value conf.low conf.high
+##   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)        0       14.8       -13.7   0         0         0     
+## 2 gdpPercap          1.00     0.00001     8.53  0         1.00      1.00  
+## 3 pop                1        0           0.237 0.813     1         1     
+## 4 year               1.11     0.00743    13.6   0         1.09      1.12  
+## 5 continentAfrica    0.0493   0.307      -9.79  0         0.0264    0.0883
+## 6 continentAsia      0.347    0.237      -4.46  0.00001   0.216     0.550 
+## 7 continentEurope    9.12     0.267       8.29  0         5.47     15.6   
+## 8 continentOceania  49.4      0.870       4.48  0.00001  10.5     366.
+```
+]
+
+---
+## Probabilidad estimada (predicted probability)
+
+Para ampliar ver este [tutorial](https://tutorials.methodsconsultants.com/posts/logistic-regression-in-r/) muy completo
+
+.codefont[
+
+```r
+# Modelo más sencillo
+reg_logit_4 &lt;- glm(lifeExp_rec ~ gdpPercap + continent,
+                   family = binomial(link = "logit"),
+                   data = gapminder)
+
+# Creo dataframe con expand.grid
+pred_df &lt;- expand.grid(continent = c("Africa", "Americas", "Europe"),
+                          gdpPercap = seq(1000, 30000, by = 5000))
+
+pred_prob &lt;- augment(reg_logit_4, 
+                     type.predict = "response", 
+                     newdata = pred_df,
+                     se_fit = TRUE) %&gt;% 
+  mutate(lower = .fitted - 1.96 * .se.fit,
+         upper = .fitted + 1.96 * .se.fit) %&gt;%
+  mutate_if(is.numeric, ~ round(.,3)) 
+```
+]
+
+---
+## Probabilidad estimada (predicted probability)
+
+
+```r
+pred_prob
+```
+
+```
+## # A tibble: 18 x 6
+##    continent gdpPercap .fitted .se.fit lower upper
+##    &lt;fct&gt;         &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Africa         1000   0.022   0.005 0.012 0.032
+##  2 Americas       1000   0.164   0.02  0.124 0.204
+##  3 Europe         1000   0.31    0.036 0.239 0.381
+##  4 Africa         6000   0.047   0.011 0.026 0.068
+##  5 Americas       6000   0.302   0.028 0.247 0.357
+##  6 Europe         6000   0.498   0.035 0.431 0.566
+##  7 Africa        11000   0.099   0.022 0.055 0.143
+##  8 Americas      11000   0.489   0.036 0.419 0.559
+##  9 Europe        11000   0.687   0.028 0.632 0.743
+## 10 Africa        16000   0.195   0.044 0.11  0.281
+## 11 Americas      16000   0.679   0.038 0.604 0.754
+## 12 Europe        16000   0.83    0.021 0.788 0.871
+## 13 Africa        21000   0.35    0.072 0.209 0.49 
+## 14 Americas      21000   0.824   0.032 0.761 0.887
+## 15 Europe        21000   0.915   0.015 0.886 0.944
+## 16 Africa        26000   0.543   0.089 0.368 0.718
+## 17 Americas      26000   0.912   0.022 0.869 0.955
+## 18 Europe        26000   0.96    0.009 0.942 0.978
+```
+
+---
+## Probabilidad estimada (predicted probability)
+
+.codefontchico[
+
+```r
+ggplot(pred_prob, aes(x = gdpPercap, y = .fitted, color = continent)) + 
+  geom_point() + 
+  geom_line() + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = .1) +
+  labs(x = "PBI per capita",
+       y = "Probabilidad esperada",
+       title = "Probabilidad esperada de tener una esperanza de vida mayor a 70 años según PBI y continente") +
+  scale_color_brewer(palette = "Dark2")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot54_pp.png" width="500px" /&gt;
+]
+
+---
+## Modelos de regresión 
+
+Con `glance()` también del paquete broom podemos obtener un tibble de una fila con estadísticas de bondad del modelo
+
+
+```r
+glance(reg_logit_2)
+```
+
+```
+## # A tibble: 1 x 8
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
+## 1         2050.    1703  -435.  886.  930.     870.        1696  1704
+```
+
+---
+
+## Visualizar coeficientes
+
+Con broom y ggplot2 podemos graficar los coeficientes de regresión:
+
+.codefont[
+
+```r
+# Modelo con un solo predictor (continentes)
+r_logit_1 &lt;- glm(lifeExp_rec ~ continent,
+                 family = binomial(link = "logit"),
+                 data = gapminder)
+
+coef_l_1 &lt;- tidy(r_logit_1, conf.int = TRUE) 
+
+coef_l_1
+```
+
+```
+## # A tibble: 5 x 7
+##   term             estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)        -0.663     0.122     -5.44 5.26e- 8   -0.906    -0.427
+## 2 continentAfrica    -2.80      0.263    -10.6  1.96e-26   -3.34     -2.30 
+## 3 continentAsia      -0.518     0.170     -3.05 2.32e- 3   -0.852    -0.185
+## 4 continentEurope     1.58      0.169      9.35 8.55e-21    1.25      1.91 
+## 5 continentOceania    3.06      0.749      4.09 4.32e- 5    1.81      4.90
+```
+]
+
+---
+
+## Visualizar coeficientes
+
+.codefont[
+
+```r
+ggplot(coef_l_1, aes(x = estimate, y = term)) +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high)) +
+  labs(title = "Factores explicativos de la expectativa de vida",
+       subtitle = "Coeficientes de regresión de lineal",
+       caption = "Data: Gapminder")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot54.png" width="500px" /&gt;
+]
+
+
+---
+
+
+## Visualizar coeficientes
+
+.codefont[
+
+```r
+# Quitamos el intercepto y agregamos línea vertical en 0
+  ggplot(coef_l_1 %&gt;% 
+  filter(term != "(Intercept)"), aes(x = estimate, y = term)) +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(title = "Factores explicativos de la expectativa de vida",
+       subtitle = "Coeficientes de regresión de lineal (excluye intercepto)",
+       caption = "Data: Gapminder")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot55.png" width="500px" /&gt;
+]
+
+---
+
+## Comparar coeficientes de dos modelos anidados
+
+Estimamos dos modelos anidados y los unimos los dos dataframes que contienen los resultados obtenidos con la función `tidy()`
+
+.codefont[
+
+```r
+# Solo continente
+r_logit_1 &lt;- glm(lifeExp_rec ~ continent,
+                 family = binomial(link = "logit"),
+                 data = gapminder)
+
+coef_l_1 &lt;- tidy(r_logit_1, conf.int = TRUE) 
+
+# Continente + gdp
+r_logit_2 &lt;- glm(lifeExp_rec ~ continent + gdpPercap,
+                 family = binomial(link = "logit"),
+                 data = gapminder)
+
+coef_l_2 &lt;- tidy(r_logit_2, conf.int = TRUE)
+
+# Primero variable que identifique cada dataframe
+coef_l_1 &lt;- mutate(coef_l_1, modelo = "Modelo 1")
+coef_l_2 &lt;- mutate(coef_l_2, modelo = "Modelo 2")
+
+# Unimos los resultados de ambos modelos
+coef_l_1_2 &lt;- rbind(coef_l_1, coef_l_2)
+```
+]
+
+---
+
+## Comparar coeficientes de dos modelos anidados
+
+.codefont[
+
+```r
+# La data resultante:
+coef_l_1_2
+```
+
+```
+## # A tibble: 11 x 8
+##    term         estimate std.error statistic  p.value conf.low conf.high modelo 
+##    &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
+##  1 (Intercept) -0.663    0.122         -5.44 5.26e- 8 -9.06e-1 -0.427    Modelo~
+##  2 continentA~ -2.80     0.263        -10.6  1.96e-26 -3.34e+0 -2.30     Modelo~
+##  3 continentA~ -0.518    0.170         -3.05 2.32e- 3 -8.52e-1 -0.185    Modelo~
+##  4 continentE~  1.58     0.169          9.35 8.55e-21  1.25e+0  1.91     Modelo~
+##  5 continentO~  3.06     0.749          4.09 4.32e- 5  1.81e+0  4.90     Modelo~
+##  6 (Intercept) -1.79     0.156        -11.5  1.39e-30 -2.10e+0 -1.49     Modelo~
+##  7 continentA~ -2.17     0.273         -7.94 2.06e-15 -2.73e+0 -1.65     Modelo~
+##  8 continentA~ -0.750    0.200         -3.76 1.72e- 4 -1.14e+0 -0.361    Modelo~
+##  9 continentE~  0.831    0.189          4.39 1.13e- 5  4.62e-1  1.20     Modelo~
+## 10 continentO~  1.56     0.774          2.02 4.36e- 2  2.44e-1  3.44     Modelo~
+## 11 gdpPercap    0.000159 0.0000125     12.8  3.06e-37  1.35e-4  0.000184 Modelo~
+```
+]
+
+---
+
+## Comparar coeficientes de dos modelos anidados
+
+.codefontchico[
+
+```r
+coef_l_1_2 %&gt;% 
+  filter(term != "(Intercept)") %&gt;% 
+  ggplot(aes(x = estimate, y = term, color = modelo)) +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(title = "Comparación modelos",
+       subtitle = "Coeficientes de regresión logística (excluye intercepto)",
+       caption = "Data: Gapminder")
+```
+]
+
+.center[
+&lt;img src="resultados/plots/plot56.png" width="500px" /&gt;
+]
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false,
+"incremental": true,
+"df_print": "kable",
+"smaller": true,
+"widescreen": true,
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
