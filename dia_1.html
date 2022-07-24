@@ -3,8 +3,8 @@
   <head>
     <title>Intro a R</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Escuela de Invierno en Métodos 2021 - Martín Opertti" />
-    <meta name="date" content="2022-07-15" />
+    <meta name="author" content="Escuela de Invierno en Métodos 2022 - Martín Opertti" />
+    <meta name="date" content="2022-07-24" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
     <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
@@ -34,8 +34,8 @@ class: center, middle, inverse, title-slide
 
 # Intro a R
 ## Día 1: Introducción y fundamentos de la programación en R
-### Escuela de Invierno en Métodos 2021 - Martín Opertti
-### July 15, 2022
+### Escuela de Invierno en Métodos 2022 - Martín Opertti
+### July 24, 2022
 
 ---
 
@@ -192,16 +192,16 @@ tweets_eim &lt;- select(tweets_eim, text, retweet_count, favorite_count)
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Quedan pocos das! Hasta el 19 de Julio pods inscribirte y participar de la EIM2022.
+   &lt;td style="text-align:left;"&gt; Es hoy! Hasta hoy, 19 de Julio, pods inscribirte y participar de la EIM2022.
 
-Te vas a quedar afuera? https://t.co/5SSlXkUBga &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+Te vas a quedar afuera? https://t.co/5SSlXkD0oC &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Extendimos el plazo de inscripciones! Hasta el 19 de Julio pods inscribirte a la EIM2022, y tomar diferentes cursos en mtodos: https://t.co/KKo5pALvS6 https://t.co/itynIG4ou6 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1553,7 +1553,7 @@ mean(vector_ej) # Aplico función para obtener la media
 ```
 
 ```
-## [1] 8.306963
+## [1] 11.37494
 ```
 
 ---
@@ -1616,7 +1616,8 @@ class: inverse, center, middle
 ---
 
 ## Paquetes 
-- Los paquetes son conjuntos de funciones, documentación de ayuda y datos-
+
+- Los paquetes son conjuntos de funciones, documentación de ayuda y a veces datos
 --
 
 - El conjunto de funciones que vienen por defecto en R se le denomina "Base". Por ej. las funciones que hemos utilizado hasta ahora  -`mean()`, `identical()`, `help()`- están dentro del R Base.
@@ -1629,7 +1630,7 @@ class: inverse, center, middle
 - Los paquetes alojados en CRAN son testados antes de ser publicados. Por eso es recomendable tener cuidado con utilizar paquetes que no han sido publicados allí aún.
 --
 
-- Los paquetes normalmente están relacionados por alguna temática, por ejemplo existen paquetes específicos para manipulación de datos [dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf), visualización de datos [ggplot2](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf) o importar y exportar datos [readr](https://cran.r-project.org/web/packages/readr/readr.pdf). Dado que R es libre, cualquier persona puede crear y publicar un paquete (publicarlo en CRAN requiere ciertos procesos igualmente), esto facilita que haya paquetes muy específicos para ciertas tareas que pueden ser de gran utilidad. Por ejemplo, existen paquetes para  conectarse con la API de Twitter [rtweet](https://cran.r-project.org/web/packages/rtweet/rtweet.pdf), para utilizar los datos de [Gapminder](https://cran.csiro.au/web/packages/gapminder/gapminder.pdf) o para analizar datos electorales y de opinión pública en Uruguay [opuy](https://github.com/Nicolas-Schmidt/opuy/blob/master/man/figures/Manual_opuy.pdf)
+- Los paquetes normalmente están relacionados a alguna temática, por ejemplo existen paquetes específicos para manipulación de datos [dplyr](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf), visualización de datos [ggplot2](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf) o importar y exportar datos [readr](https://cran.r-project.org/web/packages/readr/readr.pdf). Dado que R es libre, cualquier persona puede crear y publicar un paquete (publicarlo en CRAN requiere ciertos procesos igualmente), esto facilita que haya paquetes muy específicos para ciertas tareas que pueden ser de gran utilidad. Por ejemplo, existen paquetes para  conectarse con la API de Twitter [rtweet](https://cran.r-project.org/web/packages/rtweet/rtweet.pdf), para utilizar los datos de [Gapminder](https://cran.csiro.au/web/packages/gapminder/gapminder.pdf) o para analizar datos electorales y de opinión pública en Uruguay [opuy](https://github.com/Nicolas-Schmidt/opuy/blob/master/man/figures/Manual_opuy.pdf)
 
 ---
 
@@ -1657,8 +1658,8 @@ install.packages("dplyr") # Ejemplo
 - Esto lo debemos realizar en cada sesión de R que vayamos a utilizar (cada vez que abrimos R). 
 
 ```r
-library("nombre_del_paquete")
-library("dplyr") # Ejemplo
+library(nombre_del_paquete)
+library(dplyr) # Ejemplo
 ```
 
 ---
