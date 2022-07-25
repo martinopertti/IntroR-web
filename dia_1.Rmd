@@ -323,13 +323,13 @@ class: inverse, center, middle
 
 ## Sesiones 
 
-- Día 1: Introducción y fundamentos de la programación en R:
+- .bold[Día 1: Introducción y fundamentos de la programación en R:]
     -  Ventajas de R y distintas aplicaciones
     -  Interfaz, obtener ayuda
     -  Operadores, objetos, funciones y paquetes
     -  Funciones básicas
     
-- Día 2: Estadística descriptiva y limpieza de datos
+- .bold[Día 2: Estadística descriptiva y limpieza de datos]
     -  Marcos de datos (dataframes)
     -  Estadísticos descriptivos
     -  Importar y exportar datos desde otros formatos (excel, Stata, etc.)
@@ -339,19 +339,22 @@ class: inverse, center, middle
 
 ## Sesiones 
 
-- Día 3: Manipulación de datos
+- .bold[Día 3: Manipulación de datos]
     -  Manipulación de datos con tidyverse (ordenar, agrupar, filtrar, resumir, etc.)
     -  Integración de bases de datos
     -  Cambios de estructura de base de datos
     
-- Día 4: Visualización de datos
+- .bold[Día 4: Visualización de datos y estadística inferencial]
     -  Análisis exploratorios con gráficos
     -  Tipos de gráficos y atributos (paletas de colores, anotaciones, etc.)
     -  Gráficos animados
+    -  Estimar, ordenar y visualizar modelos de regresión
 
 ---
 
 ## Documentos para cada sesión
+
+
 Cada sesión tendrá los siguientes documentos:
 - Presentación 
 
@@ -361,6 +364,15 @@ Cada sesión tendrá los siguientes documentos:
 
 - Script con una solución para el ejercicio
 
+Todos los materiales de curso están colgados en la [webasignatura](https://webasignatura.ucu.edu.uy/login/index.php) y en la página web del curso: [https://martinopertti.github.io/IntroR-web/](https://martinopertti.github.io/IntroR-web/)
+
+---
+
+## Objetivo
+
+ El objetivo de este curso es que los estudiantes adquieran las herramientas básicas para comprender y escribir código en R para el análisis de datos. El curso provee los cimientos para que los estudiantes logren autonomía y eficiencia en el uso de R. 
+ 
+ 
 ---
 class: inverse, center, middle
 
@@ -387,14 +399,13 @@ knitr::include_graphics("ima/consola_per_2.png")
 
 ## R Studio
 
-- Source (editor): es donde creamos y editamos los scripts, es decir, donde escribimos y almacenamos el código.
+- .bold[Source (editor):] es donde creamos y editamos los scripts, es decir, donde escribimos y almacenamos el código.
 
-- Console (consola): imprime el código que corremos y la mayoría de los resultados. Podemos escribir código directamente aquí 
-también, aunque si queremos guardarlo lo recomendable es hacerlo en el script.
+- .bold[Console (consola):] imprime el código que corremos y la mayoría de los resultados. Podemos escribir código directamente aquí  también, aunque si queremos guardarlo lo recomendable es hacerlo en el script.
 
-- Environment (ambiente): Muestra todos los objetos que creaste en cada sesión.
+- .bold[Environment (ambiente):] Muestra todos los objetos que creaste en cada sesión.
 
-- Gráficos (y más): Imprime los gráficos. En el mismo panel figuran otras pestañas como "Help" que sirve para buscar ayuda.
+- .bold[Gráficos (y más):] Imprime los gráficos. En el mismo panel figuran otras pestañas como "Help" que sirve para buscar ayuda.
 
 ---
 
@@ -664,6 +675,11 @@ is.numeric(obj_1) # Podemos verificarlo directamente también
 ```
 
 ---
+class: inverse, center, middle
+
+# Vectores
+
+---
 
 ## Vectores 
 Un vector es una colección de elementos. Los vectores atómicos son los que contienen elementos todos del mismo tipo (que es lo más normal en el análisis de datos). Hay 4 tipos de vectores: lógicos, character, integer y double (estos dos últimos son numéricos). Los elementos determinarán el tipo del objeto. Crear un vector es muy sencillo mediante la función `c()`:
@@ -677,11 +693,6 @@ length(mi_primer_vector)
 str(mi_primer_vector)
 ```
 ]
-
----
-class: inverse, center, middle
-
-# Vectores
 
 ---
 
@@ -761,7 +772,7 @@ class: inverse, center, middle
 
 - Es una forma de estructurar datos con filas y columnas. Las filas suelen ser las observaciones y las columnas las variables. 
 
-- Cada columna **debe** tener la misma longitud (número de observaciones)
+- Cada columna .bold[debe] tener la misma longitud (número de observaciones)
 
 ---
 
@@ -873,6 +884,8 @@ class: inverse, center, middle
 ## Funciones 
 
 - Una función es una serie de instrucciones para realizar una tarea específica. La función suele necesitar un imput (generalmente datos) y suele devolver un output (generalmente datos luego de cierta regla)
+
+- Los objetos .bold[son] cosas, las funciones .bold[hacen] cosas
 
 - Por ejemplo, en el caso anterior, usamos la función `mean()` para calcular la media de la variable "edad" del dataframe "encuesta"
 

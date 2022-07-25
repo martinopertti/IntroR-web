@@ -29,6 +29,3 @@ Esta es la página del curso Introducción a la Programación en R
 - [Ejercicios](/scripts/dia4_ej.R)
 - [Solución de ejercicios](/scripts/dia4_ej_sol.R)
 
-
-### Clase extra
-- [Presentación](/clase_extra.html)
