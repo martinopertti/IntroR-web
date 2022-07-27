@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Intro a R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Escuela de Invierno en Métodos 2022 - Martín Opertti" />
+    <meta name="date" content="2022-07-24" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="estilo.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Intro a R
+## Clase extra: datos de encuestas
+### Escuela de Invierno en Métodos 2022 - Martín Opertti
+### July 24, 2022
+
+---
+
+class: inverse, center, middle
+
+
+
+# Importar datos y etiquetas
+
+---
+
+## Encuestas con R
+
+Trabajar con encuestas en R puede ser complicado sin las herramientas adecuadas. Varios paquetes nos ayudan a manejar estos datos. El primero que vamos a utilizar es haven es que importamos datos desde softwares en los que normalmente se procesan encuestas (SPSS o Stata, por ejemplo).
+
+Trabajaremos con una base parcial de la encuesta de Latinobarómetro en Argentina en 2007. La base original está en SPSS y muchas de sus variables tienen etiquetas.
+
+.codefont[
+
+```r
+library(haven)
+
+lat_17 &lt;- read_spss("data/Lat_17.sav") 
+
+glimpse(lat_17)
+```
+
+```
+## Rows: 1,200
+## Columns: 6
+## $ idenpa   &lt;dbl+lbl&gt; 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 3~
+## $ wt       &lt;dbl+lbl&gt; 1.583, 0.710, 0.999, 0.710, 0.710, 0.710, 0.710, 0.710, 0~
+## $ P16STGBS &lt;dbl+lbl&gt;    -1,    95, 32044, 32006, 32044, 32001,    -1, 32001, 3~
+## $ sexo     &lt;dbl+lbl&gt; 2, 1, 2, 2, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, ~
+## $ edad     &lt;dbl&gt; 61, 39, 38, 48, 67, 45, 48, 22, 42, 33, 22, 22, 26, 20, 28, 2~
+## $ REEDUC_1 &lt;dbl+lbl&gt; 3, 5, 7, 4, 4, 5, 4, 4, 4, 5, 4, 7, 5, 3, 5, 2, 3, 4, 4, ~
+```
+]
+
+---
+
+## Etiquetas
+
+Cuando importamos data de SPSS o Stata con variables categóricas que tienen etiquetas (ej: 1 = Aprueba; 2 = Desaprueba) con el paquete haven, por defecto el valor de las variables será el numérico (son de tipo dbl) y tendrán las etiquetas como atributos. En general, al trabajar en R es mejor transformar estas variables categóricas en factores. Para ello podemos usar la función `as_factor()` (no confundir con `as.factor()`)
+
+.codefont[
+
+```r
+lat_17 &lt;- read_spss("data/Lat_17.sav") %&gt;% 
+    as_factor() # Etiquetas como valores
+
+glimpse(lat_17)
+```
+
+```
+## Rows: 1,200
+## Columns: 6
+## $ idenpa   &lt;fct&gt; Argentina, Argentina, Argentina, Argentina, Argentina, Argent~
+## $ wt       &lt;fct&gt; 1.583, 0.71, 0.999, 0.71, 0.71, 0.71, 0.71, 0.71, 0.71, 0.71,~
+## $ P16STGBS &lt;fct&gt; "Don´t know", "Vota nulo/Blanco", "AR:Cambiemos (Alianza UCR/~
+## $ sexo     &lt;fct&gt; Female, Male, Female, Female, Male, Male, Male, Female, Male,~
+## $ edad     &lt;dbl&gt; 61, 39, 38, 48, 67, 45, 48, 22, 42, 33, 22, 22, 26, 20, 28, 2~
+## $ REEDUC_1 &lt;fct&gt; "Complete primary", "Complete Secondary, technical", "Complet~
+```
+]
+
+---
+
+## Etiquetas
+
+.codefontchico[
+
+```r
+# Exploremos la variable voto
+table(lat_17$P16STGBS) 
+```
+
+```
+## 
+##                                                 Undocumented 
+##                                                            0 
+##                                                    Not asked 
+##                                                            0 
+##                                               Not applicable 
+##                                                            0 
+##                                            No answer/Refused 
+##                                                           48 
+##                                                   Don´t know 
+##                                                          347 
+##                                                 Voto secreto 
+##                                                            0 
+##                           Vota por personas, no por partidos 
+##                                                            0 
+##                   Otros (partidos nacionales y provinciales) 
+##                                                           35 
+##                                             Vota nulo/Blanco 
+##                                                           55 
+##                                              No vota/Ninguno 
+##                                                          148 
+##                                    No inscrito/No tenía edad 
+##                                                            2 
+##                            AR: Frente para la Victoria (FPV) 
+##                                                          168 
+##                               AR: Partido Justicialista (PJ) 
+##                                                            0 
+##                          AR: Frente País Solidario (FREPASO) 
+##                                                            0 
+##  AR: Partido Coalición Cívica; Afirmación para una República 
+##                                                            0 
+##                               AR: Unión Cívica Radical (UCR) 
+##                                                           21 
+##                              AR: Propuesta Republicana (PRO) 
+##                                                           34 
+##             AR: Partido Humanista / Izquierda Unida (PH/ IU) 
+##                                                            0 
+##                                  AR: Partido Socialista (PS) 
+##                                                            5 
+##                                   AR: Partido Comunista (PC) 
+##                                                            0 
+##                        AR: Partido Demócrata Cristiano (PDC) 
+##                                                            0 
+##                      AR: Partido Demócrata Progresista (PDP) 
+##                                                            0 
+##          AR: Movimiento Socialista de los Trabajadores (MST) 
+##                                                            3 
+##                                      AR: Partido Obrero (PO) 
+##                                                            0 
+##                  AR: Partido Compromiso para el Cambio (CPC) 
+##                                                            0 
+##                      AR: Mov. Federal Recrear (López Murphy) 
+##                                                            0 
+##  AR: Alternativa por una República de Iguales (Elisa Carrió) 
+##                                                            0 
+##                                     AR: Izquierda Unida (IU) 
+##                                                            0 
+##       AR: Partido para una República con Oportunidades (PRO) 
+##                                                            0 
+##                              AR: Recrear Argentina (RECREAR) 
+##                                                            0 
+##                     AR: Autodeterminación y Libertad (A y L) 
+##                                                            0 
+##                                     AR: Partido Proyecto Sur 
+##                                                            0 
+##                                AR: Partido Peronismo Federal 
+##                                                           52 
+##                      AR: Unión Demócrata Independiente (UDI) 
+##                                                            0 
+##                                 AR: Renovación Nacional (RN) 
+##                                                            0 
+##                AR: Unión de Centro Centro Progresista (UCCP) 
+##                                                            0 
+##                  AR: Partido Radical Social Demócrata (PRSD) 
+##                                                            0 
+##                        AR: Partido Popular Democrático (PPD) 
+##                                                            0 
+##                    AR: Partido Alianza Humanista Verde (PHV) 
+##                                                            0 
+##                                 AR: La Alianza (UCR-FREPASO) 
+##                                                            0 
+##                                  AR: Acción por la República 
+##                                                            0 
+##                                    AR: Partido de Rico Modín 
+##                                                            0 
+##                AR: Partido Nueva Mayoría (Patricia Bullrich) 
+##                                                            0 
+##                                         AR: Nueva Dirigencia 
+##                                                            0 
+##                       AR: Unión del Centro Democrático (UCD) 
+##                                                            0 
+##                                       AR: Fuerza Republicana 
+##                                                            0 
+##                                    AR: Partido Independencia 
+##                                                            0 
+##                     AR: Nuevo Movimiento al Socialismo (MAS) 
+##                                                            0 
+##                                    AR: Nuevo Encuentro (EDE) 
+##                                                            0 
+##                                    AR: Coalición Cívica (CC) 
+##                                                            0 
+##                          AR: Frente Amplio Progresista (FAP) 
+##                                                            0 
+##             AR: Frente de Izquierda y los Trabajadores (FIT) 
+##                                                           58 
+##                                    AR: Frente Renovador (FR) 
+##                                                           41 
+##                                        AR: Partido Humanista 
+##                                                            1 
+##                            AR:Cambiemos (Alianza UCR/PRO/CC) 
+##                                                          182 
+##                                           AR: No documentado 
+##                                                            0 
+##                           BO: Movimiento al Socialismo (MAS) 
+##                                                            0 
+##                       BO: Poder Democrático Social (PODEMOS) 
+##                                                            0 
+##                                     BO: Unidad Nacional (UN) 
+##                                                            0 
+##             BO: Movimiento Nacionalista Revolucionario (MNR) 
+##                                                            0 
+##             BO: Movimiento de Izquierda Revolucionaria (MIR) 
+##                                                            0 
+##                               BO: Concertación Nacional (CN) 
+##                                                            0 
+##                            BO: Autonomías Para Bolivia (APB) 
+##                                                            0 
+##                                      BO: Alianza Social (AS) 
+##                                                            0 
+##                               BO: Movimiento sin Miedo (MSM) 
+##                                                            0 
+##                                    BO: Camino al Cambio (CC) 
+##                                                            0 
+##                      BO: Movimiento Originario Popular (MOP) 
+##                                                            0 
+##                              BO: Alianza Andrés Ibáñez (AAI) 
+##                                                            0 
+##                           BO: Movimiento Bolivia Libre (MBL) 
+##                                                            0 
+##                       BO: Autonomía Social Integradora (ASI) 
+##                                                            0 
+##          BO: Transformación Democrática Patriótica (TRADEPA) 
+##                                                            0 
+##                           BO: Conciencia de Patria (CONDEPA) 
+##                                                            0 
+##                      BO: Falange Socialista de Bolivia (FSB) 
+##                                                            0 
+##            BO: Movimiento Revolucionario Tupac Katari (MRTK) 
+##                                                            0 
+##                    BO: Acción Democratica Nacionalista (ADN) 
+##                                                            0 
+##                        BO: Partido Demócrata Cristiano (PDC) 
+##                                                            0 
+##                          BO: Unidad Civica Solidaridad (UCS) 
+##                                                            0 
+##                 BO: Frente Revolucionario de Izquierda (FRI) 
+##                                                            0 
+##                                     BO: Izquierda Unida (IU) 
+##                                                            0 
+##                                  BO: Partido Socialista (PS) 
+##                                                            0 
+##                           BO: Nueva Fuerza Republicana (NFR) 
+##                                                            0 
+##                BO: Movimiento Ciudadano para el Cambio (MCC) 
+##                                                            0 
+##                      BO: Movimiento Indígena Pachakuti (MIP) 
+##                                                            0 
+##                                      BO: Libertad y Justicia 
+##                                                            0 
+##                                 BO: UN - Samuel Doria Medina 
+##                                                            0 
+##                                           BO: Carlos Mesa G. 
+##                                                            0 
+##                                       BO: Jorge Tuto Quiroga 
+##                                                            0 
+##                                            BO: René Joaquino 
+##                                                            0 
+##                                                   BO: Verdes 
+##                                                            0 
+##                         BO: Partido Comunista Boliviano (PC) 
+##                                                            0 
+##                    BO: Vanguardia Socialista de Bolivia (VS) 
+##                                                            0 
+##                     BO: Katarismo Nacional Democrático (KND) 
+##                                                            0 
+##                        BO: Partido Demócrata Boliviano (PDB) 
+##                                                            0 
+##                                            BO: Eje Pachakuti 
+##                                                            0 
+## BO: Partido Verde de Bolivia-Instrumento de la Ecología Polí 
+##                                                            0 
+##                                    BO: Unidad Demócrata (UD) 
+##                                                            0 
+##                                          BO: Primero el Beni 
+##                                                            0 
+##                                BO: Soberanía y Libertad (SL) 
+##                                                            0 
+##                                BO: Todos por Cochabamba (TC) 
+##                                                            0 
+##                           BR: Partido dos Trabalhadores (PT) 
+##                                                            0 
+##                     BR: Partido Republicano Brasileiro (PRB) 
+##                                                            0 
+##       BR: Partido do Movimento Democrático Brasileiro (PMDB) 
+##                                                            0 
+##                    BR: Partido Comunista do Brasil (PC do B) 
+##                                                            0 
+##                      BR: Partido Socialista Brasileiro (PSB) 
+##                                                            0 
+##                                BR: Partido da República (PR) 
+##                                                            0 
+##                     BR: Partido Trabalhista Brasileiro (PTB) 
+##                                                            0 
+##                    BR: Partido Democrático Trabalhista (PDT) 
+##                                                            0 
+##                                       BR: Partido Verde (PV) 
+##                                                            0 
+##                                 BR: Partido Progressita (PP) 
+##                                                            0 
+##           BR: Partido da Social Democracia Brasileira (PSDB) 
+##                                                            0 
+##                                BR: Democratas (DEM) (ex-PFL) 
+##                                                            0 
+##                         BR: Partido Popular Socialista (PPS) 
+##                                                            0 
+##                    BR: Partido Socialismo e Liberdade (PSOL) 
+##                                                            0 
+##                  BR: Partido Social Demócrata Cristão (PSDC) 
+##                                                            0 
+##                        BR: Partido Trabalhista Cristão (PTC) 
+##                                                            0 
+##                  BR: Partido Trabalhista do Brasil (PT do B) 
+##                                                            0 
+##                    BR: Partido Republicano Progresista (PRP) 
+##                                                            0 
+##                             BR: Partido Social Liberal (PSL) 
+##                                                            0 
+##                          BR: Partido Da Frente Liberal (PFL) 
+##                                                            0 
+##                                     BR: Partido Liberal (PL) 
+##                                                            0 
+##                BR: Partido de Reedificação da Ordem Nacional 
+##                                                            0 
+##  BR: Partido Socialista de los Trabajadores Unificado (PSTU) 
+##                                                            0 
+##                    BR: Partido Progressista Brasileiro (PPB) 
+##                                                            0 
+##  BR: Partido de la Reconstrucción del Orden Nacional (PRONA) 
+##                                                            0 
+##                           BR: Partido Social Cristiano (PSC) 
+##                                                            0 
+##    BR: Partido Socialista dos Trabalhadores Unificado (PSTU) 
+##                                                            0 
+##                         BR: Partido Social Democrático (PSD) 
+##                                                            0 
+##                 BR: Partido Humanista da Solidariedade (PHS) 
+##                                                            0 
+##              BR: Partido de la Reconstrucción Nacional (PRN) 
+##                                                            0 
+##                     BR: Partido Progressista Renovador (PPR) 
+##                                                            0 
+##                             BR: Rede Sustentabilidade (REDE) 
+##                                                            0 
+##                                            BR: Solidariedade 
+##                                                            0 
+##                                         BR: Democratas - DEM 
+##                                                            0 
+##                                      BR: Partido Novo - NOVO 
+##                                                            0 
+##                        CL: Partido Demócrata Cristiano (PDC) 
+##                                                            0 
+##                          CL: Partido por la Democracia (PPD) 
+##                                                            0 
+##                                  CL: Partido Socialista (PS) 
+##                                                            0 
+##                CL: Partido Radical Social Democrático (PRSD) 
+##                                                            0 
+##                      CL: Unión Demócrata Independiente (UDI) 
+##                                                            0 
+##                                 CL: Renovación Nacional (RN) 
+##                                                            0 
+##                                   CL: Partido Comunista (PC) 
+##                                                            0 
+##                                   CL: Partido Humanista (PH) 
+##                                                            0 
+##          CL: Partido Regionalista de los Independiente (PRI) 
+##                                                            0 
+##                CL: Unión de Centro Centro Progresista (UCCP) 
+##                                                            0 
+##                            CL: Partido Humanista Verde (PHV) 
+##                                                            0 
+##               CL: Concertación de Partidos por la Democracia 
+##                                                            0 
+##                                        CL: Alianza por Chile 
+##                                                            0 
+##                                        CL: Vota por personas 
+##                                                            0 
+##                                           CL: Juntos Podemos 
+##                                                            0 
+##                                            CL: Joaquín Lavín 
+##                                                            0 
+##                                         CL: Sebastián Piñera 
+##                                                            0 
+##                                        CL: Michelle Bachelet 
+##                                                            0 
+##                                             CL: Tomás Hirsch 
+##                                                            0 
+##                                CL: Partido Progresista (MEO) 
+##                                                            0 
+##                                             CL: Concertación 
+##                                                            0 
+##                                     CL: Partido de Izquierda 
+##                                                            0 
+##                                       CL: Partido de Derecha 
+##                                                            0 
+##                                            CL: Independiente 
+##                                                            0 
+##                                CL: Partido Progresista (PRO) 
+##                                                            0 
+##                     CL: Partido Evolución Política (Evópoli) 
+##                                                            0 
+##                              CL: Revolución Democrática (RD) 
+##                                                            0 
+##                   CL: Partido Democracia Regional Patagónica 
+##                                                            0 
+##                                  CL: Izquierda Autónoma (IA) 
+##                                                            0 
+##                                          CL: Nueva Izquierda 
+##                                                            0 
+##                            CL: Partido Ecologista Verde, PEV 
+##                                                            0 
+##                                               CL: Ciudadanos 
+##                                                            0 
+##                                          CL: Partido Liberal 
+##                                                            0 
+##                                                  CL: Evopoli 
+##                                                            0 
+##                                             CL: Partido País 
+##                                                            0 
+##                                     CL: A todos los partidos 
+##                                                            0 
+##       CO: Partido Social de Unidad Nacional, Partido de la U 
+##                                                            0 
+##                             CO: Partido Cambio Radical (PCR) 
+##                                                            0 
+##                     CO: Partido Conservador Colombiano (PCC) 
+##                                                            0 
+##                         CO: Partido Liberal Colombiano (PLC) 
+##                                                            0 
+##               CO: Partido Polo Democrático Alternativo (PDA) 
+##                                                            0 
+##                                     CO: Alas Equipo Colombia 
+##                                                            0 
+##                                  CO: Alianza Social Indígena 
+##                                                            0 
+##                           CO: Partido Convergencia Ciudadana 
+##                                                            0 
+##                             CO: Partido Colombia Democrática 
+##                                                            0 
+##                                          CO: Movimiento MIRA 
+##                                                            0 
+##                                 CO: Movimiento Colombia Viva 
+##                                                            0 
+##                              CO: Movimiento Apertura Liberal 
+##                                                            0 
+##                                       CO: Independiente (IN) 
+##                                                            0 
+##                        CO: Partido Verde Opción Centro (PVC) 
+##                                                            0 
+##      CO: Movimiento Autoridades Indígenas de Colombia (AICO) 
+##                                                            0 
+##                 CO: Movimiento Alianza Social Indígena (ASI) 
+##                                                            0 
+##                    CO: Partido de Integración Nacional (PIN) 
+##                                                            0 
+##                  CO: Movimiento Nacional Afrocolombiano AFRO 
+##                                                            0 
+##                 CO: Movimiento Alianza Social Afrocolombiana 
+##                                                            0 
+##                                            CO: Nuevo Liberal 
+##                                                            0 
+##                                     CO: Partido de Izquierda 
+##                                                            0 
+##                                        CO: Partido Cristiano 
+##                                                            0 
+##                                      CO: Partido Democrático 
+##                                                            0 
+##                                        CO: Partido Ecológico 
+##                                                            0 
+##                               CO: Partido Social Democrático 
+##                                                            0 
+##                          CO: Movimiento Nacional Conservador 
+##                                                            0 
+##                                         CO: Unión Patriótica 
+##                                                            0 
+##                               CO: Movimiento Unión Cristiana 
+##                                                            0 
+##                                  CO: Alianza Democrática M19 
+##                                                            0 
+##                            CO: Movimiento Salvación Nacional 
+##                                                            0 
+##                            CO: Movimiento Fuerza Progresista 
+##                                                            0 
+##                          CO: Movimiento Cívico Independiente 
+##                                                            0 
+##         CO: Movimiento Único de Renovación Conservador MURCO 
+##                                                            0 
+##            CO: Movimiento Corriente de Renovación Socialista 
+##                                                            0 
+##    CO: Movimiento Independiente Obrero y Revolucionario MOIR 
+##                                                            0 
+##                                     CO: Movimiento Ciudadano 
+##                                                            0 
+##                                  CO: Centro Democrático (CD) 
+##                                                            0 
+##                                      CO: Alianza Verde (PVC) 
+##                                                            0 
+##                       CO: Alianza Social Independiente (ASI) 
+##                                                            0 
+##                                   CO: Opción Ciudadana (PIN) 
+##                                                            0 
+##           CO:  Movimiento Alternativo Indigena y Social MAIS 
+##                                                            0 
+##                     CR: Partido de Liberación Nacional (PLN) 
+##                                                            0 
+##                           CR: Partido Acción Ciudadana (PAC) 
+##                                                            0 
+##                               CR: Movimiento Libertario (ML) 
+##                                                            0 
+##                   CR: Partido Unidad Social Cristiana (PUSC) 
+##                                                            0 
+##                         CR: Alianza Nacional Cristiana (ANC) 
+##                                                            0 
+##                          CR: Partido Fuerza Democrática (FD) 
+##                                                            0 
+##                       CR: Partido Independiente Obrero (PIO) 
+##                                                            0 
+##                       CR: Partido Integración Nacional (PIN) 
+##                                                            0 
+##                         CR: Partido Patriótico Nacional (PN) 
+##                                                            0 
+##                               CR: Partido Pueblo Unido (PPU) 
+##                                                            0 
+##                   CR: Partido Renovación Costarricense (PRC) 
+##                                                            0 
+##                           CR: Partido Rescate Nacional (PRN) 
+##                                                            0 
+##                            CR: Partido Unión General (PUGEN) 
+##                                                            0 
+##                               CR: Unión para el Cambio (UPC) 
+##                                                            0 
+##                              CR: Accesibilidad sin Exclusión 
+##                                                            0 
+##                                            CR: Frente Amplio 
+##                                                            0 
+##                                        CR: Partido Demócrata 
+##                                                            0 
+##                           CR: Partido Nacional Independiente 
+##                                                            0 
+##                                  CR: Alianza Patriótica (AP) 
+##                                                            0 
+##                      CR: Partido Restauración Nacional (PRN) 
+##                                                            0 
+##                                 CR: Partido Nueva Generación 
+##                                                            0 
+##                DO: Partido de la Liberación Dominicana (PLD) 
+##                                                            0 
+##                  DO: Partido Revolucionario Dominicano (PRD) 
+##                                                            0 
+##               DO: Partido Reformista Social Cristiano (PRSC) 
+##                                                            0 
+##                       DO: Partido de Unidad Democrática (UD) 
+##                                                            0 
+##                  DO: Partido Alianza por la Democracia (APD) 
+##                                                            0 
+##                  DO: Partido Alianza Social Dominicana (ASD) 
+##                                                            0 
+##                       DO: Partido Bloque Institucional (BIS) 
+##                                                            0 
+##                          DO: Partido Demócrata Popular (PDP) 
+##                                                            0 
+##                     DO: Partido Fuerza de la Revolución (FR) 
+##                                                            0 
+##                DO: Partido Fuerza Nacional Progresista (FNP) 
+##                                                            0 
+##        DO: Partido Liberal de la República Dominicana (PLRD) 
+##                                                            0 
+##        DO: Movimiento Independencia, Unidad y Cambio (MIUCA) 
+##                                                            0 
+##                      DO: Movimiento Popular Dominicano (MPD) 
+##                                                            0 
+##           DO: Partido Nacional de Veteranos y Civiles (PNVC) 
+##                                                            0 
+##                          DO: Partido Nueva Alternativa (PNA) 
+##                                                            0 
+##                          DO: Partido Popular Cristiano (PPC) 
+##                                                            0 
+##            DO: Partido Quisqueyano Demócrata Cristiano (PQD) 
+##                                                            0 
+##                      DO: Partido Renacentista Nacional (PRN) 
+##                                                            0 
+##               DO: Partido Revolucionario Independiente (PRI) 
+##                                                            0 
+##           DO: Partido de los Trabajadores Dominicanos  (PTD) 
+##                                                            0 
+##            DO: Partido de la Unión Demócrata Cristiana (UDC) 
+##                                                            0 
+##                         DO: Partido de Unidad Nacional (PUN) 
+##                                                            0 
+##       DO: Partido Revolucionario Moderno (Mayoritario) (PRM) 
+##                                                            0 
+##                                  EC: Movimiento Alianza Pais 
+##                                                            0 
+##                               EC: Movimiento Pachakutik (PK) 
+##                                                            0 
+##                     EC: Movimiento Popular Democrático (MPD) 
+##                                                            0 
+##                               EC: Izquierda Democrática (ID) 
+##                                                            0 
+##                     EC: Partido Roldosista Ecuatoriano (PRE) 
+##                                                            0 
+##         EC: Partido Concentración de Fuerzas Populares (CFP) 
+##                                                            0 
+##                 EC: Partido Socialista-Frente Amplio (PS-FA) 
+##                                                            0 
+##                                   EC: Partido Libertad (PLE) 
+##                                                            0 
+##  EC: Partido Renovador Institucional Acción Nacional (PRIAN) 
+##                                                            0 
+##                           EC: Partido Social Cristiano (PSC) 
+##                                                            0 
+##                  EC: Partido Sociedad Patriótica 21 de Enero 
+##                                                            0 
+##                                  EC: Democracia Popular (DP) 
+##                                                            0 
+##                  EC: Partido Unión Demócrata Cristiana (UDC) 
+##                                                            0 
+##                            EC: Partido Liberal Radical (PLR) 
+##                                                            0 
+##            EC: Partido Movimiento de Acuerdo Nacional (MANA) 
+##                                                            0 
+##                           EC: Partido Una Nueva Opción (UNO) 
+##                                                            0 
+##                           EC: Frente Radical Alfarista (FRA) 
+##                                                            0 
+##                                 EC: Partido Conservador (PC) 
+##                                                            0 
+##                                           EC: Alianza RED-ID 
+##                                                            0 
+##                        EC: Movimiento Indígena Amauta Jatari 
+##                                                            0 
+##                     EC: Partido Socialista Ecuatoriano (PSE) 
+##                                                            0 
+##              EC: Partido Conservador - Unidad Nacional (PUN) 
+##                                                            0 
+##                                     EC: Partido Liberal (PL) 
+##                                                            0 
+##                     EC: Acción Popular Revolucionaria (APRE) 
+##                                                            0 
+##                               EC: Movimiento Nuevo País (NP) 
+##                                                            0 
+## EC: Movimiento de Unidad Plurinacional Pachakutik-Nuevo País 
+##                                                            0 
+##                       EC: Partido de Unión Republicana (PUR) 
+##                                                            0 
+##                                 EC: Liberación Nacional (PL) 
+##                                                            0 
+##                                       EC: Movimiento Ruptura 
+##                                                            0 
+##            EC: Movimiento Equidad, Progreso y Orden (EQUIPO) 
+##                                                            0 
+##                        EC: Partido Sociedad Patriótica (PSP) 
+##                                                            0 
+##               EC: Movimiento Patria Altiva y Soberana (PAIS) 
+##                                                            0 
+##                             EC: Creando Oportunidades (CREO) 
+##                                                            0 
+##       EC: Movimiento de la Concertación Nacional Democrática 
+##                                                            0 
+##                                    EC: Partido Participación 
+##                                                            0 
+##                                EC: Movimieno Verde Ecológico 
+##                                                            0 
+##                                         EC: Movimieno Cambio 
+##                                                            0 
+##                          EC: Movimieno Conciliación Nacional 
+##                                                            0 
+##              EC: Movimiento Sociedad Unida Más Acción (SUMA) 
+##                                                            0 
+##                           EC: Movimiento F Compromiso social 
+##                                                            0 
+## SV: Frente Farabundo Martí para la Liberación Nacional  (FML 
+##                                                            0 
+##                 SV: Alianza Republicana Nacionalista (ARENA) 
+##                                                            0 
+## SV: Partido de Concertación Nacional o Partido de Conciliaci 
+##                                                            0 
+##                        SV: Partido Demócrata Cristiano (PDC) 
+##                                                            0 
+##                             SV: Centro Demócrata Unido (CDU) 
+##                                                            0 
+##                                         SV: Fuerza Cristiana 
+##                                                            0 
+##                     SV: Movimiento Auténtico Cristiano (MAC) 
+##                                                            0 
+##       SV: Movimiento Estable Republicano Centrista (MERECEN) 
+##                                                            0 
+##                                SV: Movimiento Renovador (MR) 
+##                                                            0 
+##                            SV: Partido Acción Demócrata (AD) 
+##                                                            0 
+##                          SV: Partido Acción Renovadora (PAR) 
+##                                                            0 
+##      SV: Partido Auténtico Institucional Salvadoreño (PAISA) 
+##                                                            0 
+##                                   SV: Partido Demócrata (PD) 
+##                                                            0 
+##                        SV: Partido Liberal Democrático (PLD) 
+##                                                            0 
+##                           SV: Partido Nacional Liberal (PNL) 
+##                                                            0 
+##                     SV: Partido de Orientación Popular (POP) 
+##                                                            0 
+##                          SV: Partido Popular Laborista (PPL) 
+##                                                            0 
+##                        SV: Partido Popular Republicano (PPR) 
+##                                                            0 
+##                        SV: Partido Popular Salvadoreño (PPS) 
+##                                                            0 
+##                           SV: Partido Social Demócrata (PSD) 
+##                                                            0 
+##                             SV: Unión Social Cristiana (USC) 
+##                                                            0 
+##               SV: Gran Alianza por la Unidad Nacional (GANA) 
+##                                                            0 
+##                     SV: Liga Democrática Republicana (LIDER) 
+##                                                            0 
+##                         SV: Pueblo Unido Nuevo Trato (PUNTO) 
+##                                                            0 
+##                  SV: Frente Democrático Revolucionario (FDR) 
+##                                                            0 
+##                                  SV: Partido Acción Nacional 
+##                                                            0 
+##                         SV: Partido Convergencia Democrática 
+##                                                            0 
+##                 SV: Movimiento de Solidaridad Nacional (MSN) 
+##                                                            0 
+##                       SV: PES: Partido de la Esperanza (PES) 
+##                                                            0 
+##                       GT: Unidad Nacional de Esperanza (UNE) 
+##                                                            0 
+##                                    GT: Partido Patriota (PP) 
+##                                                            0 
+##                             GT: Gran Alianza Nacional (GANA) 
+##                                                            0 
+##                           GT: Centro de Acción Social (CASA) 
+##                                                            0 
+##                             GT: Encuentro por Guatemala (EG) 
+##                                                            0 
+##                                   GT: Partido Unionista (PU) 
+##                                                            0 
+##                    GT: Frente Republicano Guatemalteco (FRG) 
+##                                                            0 
+##                          GT: Unión del Cambio Nacional (UCN) 
+##                                                            0 
+##                       GT: Partido de Avanzada Nacional (PAN) 
+##                                                            0 
+##                                   GT: Unión Democrática (UD) 
+##                                                            0 
+##       GT: Unidad Revolucionaria Nacional Guatemalteca (URNG) 
+##                                                            0 
+##                  GT: Democracia Cristiana Guatemalteca (DCG) 
+##                                                            0 
+##                      GT: Desarrollo Integral Auténtico (DIA) 
+##                                                            0 
+##                               GT: Alianza Nueva Nación (ANN) 
+##                                                            0 
+##                                GT: Bienestar Nacional (BIEN) 
+##                                                            0 
+##                                          GT: Los Verdes (LV) 
+##                                                            0 
+##                  GT: Movimiento de Liberación Nacional (MLN) 
+##                                                            0 
+##                 GT: Movimiento de Principios y Valores (MPV) 
+##                                                            0 
+##                               GT: Movimiento Reformador (MR) 
+##                                                            0 
+##                     GT: Partido Libertador Progresista (PLP) 
+##                                                            0 
+##                    GT: Partido de Solidaridad Nacional (PSN) 
+##                                                            0 
+##                                            GT: Transparencia 
+##                                                            0 
+##                                     GT: No documentado - 923 
+##                                                            0 
+##                                     GT: No documentado - 924 
+##                                                            0 
+##                                     GT: No documentado - 925 
+##                                                            0 
+##                                     GT: No documentado - 926 
+##                                                            0 
+##                                     GT: No documentado - 927 
+##                                                            0 
+##                                     GT: No documentado - 928 
+##                                                            0 
+##                                     GT: No documentado - 929 
+##                                                            0 
+##                                     GT: No documentado - 930 
+##                                                            0 
+##               GT: Partido Político Visión con Valores (VIVA) 
+##                                                            0 
+##                     GT: Compromiso Renovación y Orden (CREO) 
+##                                                            0 
+##                    GT: Libertad Democrática Renovada (LIDER) 
+##                                                            0 
+##                                      GT: Victoria (VICTORIA) 
+##                                                            0 
+##                GT: Frente Democrático Nueva Guatemala (FDNG) 
+##                                                            0 
+##                       GT: Partido Demócrata Cristiano  (PDC) 
+##                                                            0 
+##                 GT: Acción Reconciliadora Democrática (ARDE) 
+##                                                            0 
+##                     GT: Unidad Nacionalista Organizada (UNO) 
+##                                                            0 
+##             GT: Frente de Convergencia Nacional (FCN-Nación) 
+##                                                            0 
+##                                                      GT: UNA 
+##                                                            0 
+##                                     HO: Partido Liberal (PL) 
+##                                                            0 
+##                       HO: Partido Nacional de Honduras (PNH) 
+##                                                            0 
+##                       HO: Partido de Unión Democrática (PUD) 
+##                                                            0 
+##           HO: Partido Demócrata Cristiano de Honduras (PDCH) 
+##                                                            0 
+##                       HO: Partido Innovación y Unidad (PINU) 
+##                                                            0 
+##                HO: El Partido Libertad y Refundación (LIBRE) 
+##                                                            0 
+##                         HO: El Partido Anti Corrupción (PAC) 
+##                                                            0 
+##                            MX: Partido Acción Nacional (PAN) 
+##                                                            0 
+##               MX: Partido Revolucionario Institucional (PRI) 
+##                                                            0 
+##               MX: Partido de la Revolución Democrática (PRD) 
+##                                                            0 
+##                MX: Partido Verde Ecologista de México (PVEM) 
+##                                                            0 
+##                                 MX: Partido del Trabajo (PT) 
+##                                                            0 
+##                            MX: Partido Nueva Alianza (PANAL) 
+##                                                            0 
+##                                             MX: Convergencia 
+##                                                            0 
+## MX: Alternativa Socialdemócrata (antes Alternativa Socialdem 
+##                                                            0 
+##                      MX: Partido de Centro Democrático (PCD) 
+##                                                            0 
+##       MX: Partido Auténtico de la Revolución Mexicana (PARM) 
+##                                                            0 
+##                           MX: Partido Social Demócrata (PSD) 
+##                                                            0 
+##                         MX: Partido Popular Socialista (PPS) 
+##                                                            0 
+## MX: Partido del Frente Cardenista de Reconstrucción Nacional 
+##                                                            0 
+##                                MX: Movimiento ciudadano (MC) 
+##                                                            0 
+##                MX: Movimiento Regeneración Nacional (MORENA) 
+##                                                            0 
+##                           MX: Partido Encuentro Social (PES) 
+##                                                            0 
+##                                            MX: Independiente 
+##                                                            0 
+##  NI: Partido Frente Sandinista de Liberación Nacional (FSLN) 
+##                                                            0 
+##                 NI: Partido Liberal Constitucionalista (PLC) 
+##                                                            0 
+##               NI: Partido Alianza Liberal Nicaragüense (ALN) 
+##                                                            0 
+##    NI: Alianza Partido Movimiento Renovador Sandinista (MRS) 
+##                                                            0 
+##                   NI: Partido Resistencia Nicaragüense (PRN) 
+##                                                            0 
+##                           NI: Partido Social Cristiano (PSC) 
+##                                                            0 
+##              NI: Partido Camino Cristiano Nicaragüense (CCN) 
+##                                                            0 
+##                                 NI: Partido Conservador (PC) 
+##                                                            0 
+##                                  NI: Partido Yatama (YATAMA) 
+##                                                            0 
+##            NI: Partido Movimiento Renovador Sandinista (MRS) 
+##                                                            0 
+##                          NI: Alianza por la República (APRE) 
+##                                                            0 
+##                               NI: Alternativa Cristiana (AC) 
+##                                                            0 
+##                           NI: Partido Acción Ciudadana (PAC) 
+##                                                            0 
+##               NI: Partido Acción Nacional Conservadora (ANC) 
+##                                                            0 
+##                     NI: Partido Alianza Conservadora (ALCON) 
+##                                                            0 
+##                        NI: Partido Arriba la República (PAR) 
+##                                                            0 
+##                           NI: Partido Liberal 1913 (PL-1913) 
+##                                                            0 
+##                      NI: Partido Liberal Independiente (PLI) 
+##                                                            0 
+##                       NI: Partido Liberal Nacionalista (PLN) 
+##                                                            0 
+##               NI: Partido Liberal de Unidad Nacional (PLIUN) 
+##                                                            0 
+##          NI: Partido Movimiento de Acción Conservadora (MAC) 
+##                                                            0 
+##            NI: Partido Movimiento de Salvación Liberal (MSL) 
+##                                                            0 
+##             NI: Partido Movimiento de Unidad Cristiana (MUC) 
+##                                                            0 
+##                NI: Movimiento de Unidad Revolucionaria (MUR) 
+##                                                            0 
+##                               NI: Proyecto Nacional (PRONAL) 
+##                                                            0 
+##                         NI: Partido Nacional Demócrata (PND) 
+##                                                            0 
+##                                NI: Partido Neoliberal (PALI) 
+##                                                            0 
+##         NI: Partido Revolucionario de los Trabajadores (PRT) 
+##                                                            0 
+##                           NI: Partido Social Demócrata (PSD) 
+##                                                            0 
+##                                  NI: Partido Socialista (PS) 
+##                                                            0 
+##                       NI: Partido de Unidad Demócrata (PUDE) 
+##                                                            0 
+##                  NI: Partido Unión Demócrata Cristiana (UDC) 
+##                                                            0 
+##                 NI: Partido Unionista Centroamericano (PUCA) 
+##                                                            0 
+##                           NI: Alternativa por el Cambio (AC) 
+##                                                            0 
+##                                    NI: No documentado - 1235 
+##                                                            0 
+##                                    NI: No documentado - 1236 
+##                                                            0 
+##                                    NI: No documentado - 1237 
+##                                                            0 
+##                                    NI: No documentado - 1238 
+##                                                            0 
+##                           NI: Unión Nacional Opositora (UNO) 
+##                                                            0 
+##                   NI: Unión Democrática de Liberación (UDEL) 
+##                                                            0 
+##                                     NI: Alianza Pan y Fuerza 
+##                                                            0 
+##                                                NI: Izquierda 
+##                                                            0 
+##                                           NI: Tercera opción 
+##                                                            0 
+##                          NI: Alianza Evangélica Nicaragüense 
+##                                                            0 
+##                            NI: Partido Alianza Liberal (PAL) 
+##                                                            0 
+##                      NI: Frente de Liberación Nacional (FLN) 
+##                                                            0 
+##                 PA: Partido Revolucionario Democrático (PRD) 
+##                                                            0 
+##   PA: Movimiento Liberal Republicano Nacionalista (MOLIRENA) 
+##                                                            0 
+##                                    PA: Unión Patriótica (UP) 
+##                                                            0 
+##                          PA: Partido Cambio Democrático (CD) 
+##                                                            0 
+##                                 PA: Partido Panameñista (PP) 
+##                                                            0 
+##                                     PA: Partido Popular (PP) 
+##                                                            0 
+##                             PA: Vanguardia Moral a la Patria 
+##                                                            0 
+##                                  PA: Partido Arnulfista (PA) 
+##                                                            0 
+##                                 PA: Partido Solidaridad (PS) 
+##                                                            0 
+##                           PA: Partido Liberal Nacional (PLN) 
+##                                                            0 
+##                                     PA: Partido Liberal (PL) 
+##                                                            0 
+##                            Partido Demócrata Cristiano (PDC) 
+##                                                            0 
+##                                           Partido Papa Egoro 
+##                                                            0 
+##                                   Partido Movimiento Liberal 
+##                                                            0 
+##                                 Partido Nacionalista Popular 
+##                                                            0 
+##                 PY: Partido Liberal Radical Auténtico (PLRA) 
+##                                                            0 
+##                             PY: Partido País Solidario (PPS) 
+##                                                            0 
+##                         PY: Partido Encuentro Nacional (PEN) 
+##                                                            0 
+##              PY: Partido del Movimiento al Socialismo (PMAS) 
+##                                                            0 
+##                    PY: Partido Democrático Progresista (PDP) 
+##                                                            0 
+##                        PY: Movimiento Popular Tekojojá (MPT) 
+##                                                            0 
+##                    PY: Asociación Nacional Republicana (ANR) 
+##                                                            0 
+##              PY: Unión Nacional de Ciudadanos Éticos (UNACE) 
+##                                                            0 
+##                             PY: Partido Patria Querida (PPQ) 
+##                                                            0 
+##                  PY: Partido Revolucionario Febrerista (PRF) 
+##                                                            0 
+##                        PY: Partido Comunista Paraguayo (PCP) 
+##                                                            0 
+##                                      PY: Partido Blanco (PB) 
+##                                                            0 
+##                                    PY: Partido Colorado (PC) 
+##                                                            0 
+##                        PY: Partido Demócrata Cristiano (PDC) 
+##                                                            0 
+##                            PE: Partido Aprista Peruano (PAP) 
+##                                                            0 
+##                       PE: Partido Nacionalista Peruano (PNP) 
+##                                                            0 
+##                                      PE: Acción Popular (AP) 
+##                                                            0 
+##                                        PE: Perú Posible (PC) 
+##                                                            0 
+##                          PE: Partido Popular Cristiano (PPC) 
+##                                                            0 
+##                               PE: Restauración Nacional (RN) 
+##                                                            0 
+##                                           PE: Renovación (R) 
+##                                                            0 
+##           PE: Sí Cumple/Alianza Fujimorista (SC)/Fuerza 2011 
+##                                                            0 
+##                                          PE: Somos Perú (SP) 
+##                                                            0 
+##                       PE: Partido Solidaridad Nacional (PSN) 
+##                                                            0 
+## PE: Unidad Nacional (Partido Popular Cristiano-Solidaridad N 
+##                                                            0 
+##                                  PE: Unión por el Perú (UPP) 
+##                                                            0 
+##                               PE: Alianza por el Futuro (AF) 
+##                                                            0 
+##             PE: Frente de Centro (Somos Perú-Acción Popular) 
+##                                                            0 
+##         PE: Unión por el Perú / Partido Nacionalista Peruano 
+##                                                            0 
+##                   PE: Frente Independiente Moralizador (FIM) 
+##                                                            0 
+##                                                PE: Cambio 90 
+##                                                            0 
+##                                             PE: Vamos Vecino 
+##                                                            0 
+##          PE: Alianza Popular Revolucionaria Americana (APRA) 
+##                                                            0 
+##                       PE: Partido Renacimiento Andino (PRAN) 
+##                                                            0 
+##             PE: Unión por el Perú/Social Democracia (UPP-SI) 
+##                                                            0 
+##                                    PE: Partido Proyecto País 
+##                                                            0 
+##            PE: Frente Popular Agrícola Fia del Perú (PREPAP) 
+##                                                            0 
+##                   PE: Movimiento Independiente Agrario (MIA) 
+##                                                            0 
+##                                     PE: Izquierda Unida (IU) 
+##                                                            0 
+## PE: Frente Nacional de Trabajadores y Campesinos (FRENATRACA 
+##                                                            0 
+##            PE: Frente Popular Agrícola FIA del Perú (FREPAP) 
+##                                                            0 
+##                   PE: Fuerza Popular (antiguo 'Fuerza 2011') 
+##                                                            0 
+## PE: Todos por el Perú (antiguo 'Coordinadora Nacional de Ind 
+##                                                            0 
+##                                 PE: Alianza para el Progreso 
+##                                                            0 
+##                             PE: Peruanos por el Kambio (PPK) 
+##                                                            0 
+##                                          PE: Alianza Popular 
+##                                                            0 
+##                                            PE: Frente Amplio 
+##                                                            0 
+##                                    PE: Partido Independiente 
+##                                                            0 
+##                 ES: Partido Socialista Obrero Español (PSOE) 
+##                                                            0 
+##                                     ES: Partido Popular (PP) 
+##                                                            0 
+##                                 ES: Izquierda Unida (IU/ICV) 
+##                                                            0 
+##                                ES: Convergencia i Unió (CiU) 
+##                                                            0 
+##                         ES: Partido Nacionalista Vasco (PNV) 
+##                                                            0 
+##                       ES: Unión Progreso y Democracia (UPyD) 
+##                                                            0 
+##                  ES: Esquerra Republicana de Catalunya (ERC) 
+##                                                            0 
+##                        ES: Bloque Nacionalista Gallego (BNG) 
+##                                                            0 
+##                                   ES: Coalición Canaria (CC) 
+##                                                            0 
+##                                    ES: Nafarroa Bai (Na Bai) 
+##                                                            0 
+##                           ES: Unión del Pueblo Navarro (UPN) 
+##                                                            0 
+##                                   ES: Eusko Alkartasuna (EA) 
+##                                                            0 
+##                                      ES: Herri Batasuna (HB) 
+##                                                            0 
+##               ES: Iniciativa por Catalunya-Los Verdes(IC-EV) 
+##                                                            0 
+##                                 ES: Partido Andalucista (PA) 
+##                                                            0 
+##                                     ES: Unió Valenciana (UV) 
+##                                                            0 
+##                                       UY: Frente Amplio (FA) 
+##                                                            0 
+##                                    UY: Partido Nacional (PN) 
+##                                                            0 
+##                                    UY: Partido Colorado (PC) 
+##                                                            0 
+##                               UY: Partido Independiente (PI) 
+##                                                            0 
+##                                         UY: Asamblea Popular 
+##                                                            0 
+##                                            UY: Nuevo Espacio 
+##                                                            0 
+##                      UY: Encuentro Progresista-Frente Amplio 
+##                                                            0 
+##             VE: Partido Socialista Unido de Venezuela (PSUV) 
+##                                                            0 
+##                                  VE: Patria Para Todos (PPT) 
+##                                                            0 
+##                     VE: Partido Comunista de Venezuela (PCV) 
+##                                                            0 
+##                                                 VE: Tupamaro 
+##                                                            0 
+##                           VE: Unión Popular Venezolana (UPV) 
+##                                                            0 
+##                                    VE: Un Nuevo Tiempo (UNT) 
+##                                                            0 
+##                                    VE: Primero Justicia (PJ) 
+##                                                            0 
+##                                  VE: Acción Democrática (AD) 
+##                                                            0 
+##  VE: Comite de Organización Política Electoral Independiente 
+##                                                            0 
+##                           VE: Movimiento al Socialismo (MAS) 
+##                                                            0 
+##                                  VE: Proyecto Venezuela (PV) 
+##                                                            0 
+##                       VE: Por la Democracia Social (PODEMOS) 
+##                                                            0 
+##                                     VE: Gente Emergente (GE) 
+##                                                            0 
+##                                   VE: La Causa Radical (LCR) 
+##                                                            0 
+##                               VE: Venezuela de Primera (VDP) 
+##                                                            0 
+##                               VE: Alianza Bravo Pueblo (ABP) 
+##                                                            0 
+##                                        VE: Bandera Roja (BR) 
+##                                                            0 
+##                             VE: Movimiento V República (MVR) 
+##                                                            0 
+##                    VE: Movimiento Electoral del Pueblo (MEP) 
+##                                                            0 
+##                                                   VE: PIEDRA 
+##                                                            0 
+##                                     VE: Un Solo Pueblo (USP) 
+##                                                            0 
+##                                             VE: Convergencia 
+##                                                            0 
+##                                  VE: Partidos independientes 
+##                                                            0 
+## VE: Mesa de la Unidad Democrática (MUD)/ Unidad/ partidos de 
+##                                                            0 
+##                                      VE: Buscando soluciones 
+##                                                            0 
+##                                       VE: Cuentas para todos 
+##                                                            0 
+##                                         VE: Voluntad Popular 
+##                                                            0 
+##                                  VE: Partido de la Oposición 
+##                                                            0 
+##         VE: Integración y Renovación Nueva Esperanza (IRENE) 
+##                                                            0 
+##                     VE: Apertura a la Participación Nacional 
+##                                                            0 
+##          VE: Movimiento Bolivariano Revolucionario (MBR)-200 
+##                                                            0 
+##                                     VE: Avanzada Progresista 
+##                                                            0
+```
+]
+
+---
+
+## Etiquetas
+
+Si bien la data es solo de Argentina, originalmente estaban todos los países por lo que los valores de los factores corresponden a todas las etiquetas posibles por más que no haya casos en la mayoría
+
+.codefontchico[
+
+```r
+# Demasiados factores, pasemos a character
+table(as.character(lat_17$P16STGBS))
+```
+
+```
+## 
+##    AR: Frente de Izquierda y los Trabajadores (FIT) 
+##                                                  58 
+##                   AR: Frente para la Victoria (FPV) 
+##                                                 168 
+##                           AR: Frente Renovador (FR) 
+##                                                  41 
+## AR: Movimiento Socialista de los Trabajadores (MST) 
+##                                                   3 
+##                               AR: Partido Humanista 
+##                                                   1 
+##                       AR: Partido Peronismo Federal 
+##                                                  52 
+##                         AR: Partido Socialista (PS) 
+##                                                   5 
+##                     AR: Propuesta Republicana (PRO) 
+##                                                  34 
+##                      AR: Unión Cívica Radical (UCR) 
+##                                                  21 
+##                   AR:Cambiemos (Alianza UCR/PRO/CC) 
+##                                                 182 
+##                                          Don´t know 
+##                                                 347 
+##                                   No answer/Refused 
+##                                                  48 
+##                           No inscrito/No tenía edad 
+##                                                   2 
+##                                     No vota/Ninguno 
+##                                                 148 
+##          Otros (partidos nacionales y provinciales) 
+##                                                  35 
+##                                    Vota nulo/Blanco 
+##                                                  55
+```
+]
+
+---
+
+## Etiquetas
+
+Un poco de manipulación de datos:
+
+.codefont[
+
+```r
+# Primero nos aseguramos de que el ponderador sea numérico
+# Renombremos la variable de intención de voto, transformemosla en caracteres 
+# para quitarle los niveles vacíos y creemos una variable resumen con PRO/UCR, 
+# FPV y otros
+lat_17 &lt;- lat_17 %&gt;% 
+  mutate(wt = as.numeric(wt)) %&gt;% 
+  mutate(int_voto = as.character(P16STGBS)) %&gt;% 
+  mutate(int_voto_res = case_when(
+    str_detect(int_voto, "FPV") ~ "FPV",
+    str_detect(int_voto, "PRO") ~ "Cambiemos",
+    str_detect(int_voto, "UCR") ~ "Cambiemos",
+    TRUE ~ "Otros"
+  ))
+```
+]
+
+---
+
+## Etiquetas
+
+Chequeo que haya quedado bien
+
+.codefont[
+
+```r
+table(lat_17$int_voto, lat_17$int_voto_res)
+```
+
+```
+##                                                      
+##                                                       Cambiemos FPV Otros
+##   AR: Frente de Izquierda y los Trabajadores (FIT)            0   0    58
+##   AR: Frente para la Victoria (FPV)                           0 168     0
+##   AR: Frente Renovador (FR)                                   0   0    41
+##   AR: Movimiento Socialista de los Trabajadores (MST)         0   0     3
+##   AR: Partido Humanista                                       0   0     1
+##   AR: Partido Peronismo Federal                               0   0    52
+##   AR: Partido Socialista (PS)                                 0   0     5
+##   AR: Propuesta Republicana (PRO)                            34   0     0
+##   AR: Unión Cívica Radical (UCR)                             21   0     0
+##   AR:Cambiemos (Alianza UCR/PRO/CC)                         182   0     0
+##   Don´t know                                                  0   0   347
+##   No answer/Refused                                           0   0    48
+##   No inscrito/No tenía edad                                   0   0     2
+##   No vota/Ninguno                                             0   0   148
+##   Otros (partidos nacionales y provinciales)                  0   0    35
+##   Vota nulo/Blanco                                            0   0    55
+```
+]
+
+---
+class: inverse, center, middle
+
+# Tablas ponderadas
+
+---
+
+## Tablas ponderadas
+
+Con dplyr podemos crear tablas o resumenes ponderados usando la función `sum()` y la variable de ponderación como argumento.
+
+.pull-left[
+.codefont[
+
+```r
+# Simple
+lat_17 %&gt;% 
+  group_by(int_voto_res) %&gt;% 
+  summarise(frec = n())
+```
+
+```
+## # A tibble: 3 x 2
+##   int_voto_res  frec
+##   &lt;chr&gt;        &lt;int&gt;
+## 1 Cambiemos      237
+## 2 FPV            168
+## 3 Otros          795
+```
+]]
+
+.pull-right[
+.codefont[
+
+```r
+# Ponderada
+lat_17 %&gt;% 
+  group_by(int_voto_res) %&gt;% 
+  summarise(frec_pond = sum(wt)) 
+```
+
+```
+## # A tibble: 3 x 2
+##   int_voto_res frec_pond
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Cambiemos          496
+## 2 FPV                362
+## 3 Otros             1830
+```
+]]
+
+---
+## Tablas ponderadas
+
+Si agregamos una línea con `mutate()` ya podemos obtener los porcentajes
+
+.codefont[
+
+```r
+# Con proporción
+lat_17 %&gt;% 
+  group_by(int_voto_res) %&gt;% # Variables de agrupar
+  summarise(frec_pond = sum(wt)) %&gt;%  # Resumir frecuencias (ponderadas)
+  mutate(per = frec_pond / sum(frec_pond)) # Agregar columna de porcentaje
+```
+
+```
+## # A tibble: 3 x 3
+##   int_voto_res frec_pond   per
+##   &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
+## 1 Cambiemos          496 0.185
+## 2 FPV                362 0.135
+## 3 Otros             1830 0.681
+```
+]
+
+---
+## Tablas ponderadas
+
+También podemos crear una tabla cruzada
+
+
+```r
+# Dos variables porcentaje por factor: sexo según voto
+s_vot &lt;- lat_17 %&gt;% 
+  group_by(int_voto_res, sexo) %&gt;% 
+  summarise(frec_pond = sum(wt)) %&gt;%
+  mutate(per = frec_pond / sum(frec_pond)) 
+s_vot
+```
+
+```
+## # A tibble: 6 x 4
+## # Groups:   int_voto_res [3]
+##   int_voto_res sexo   frec_pond   per
+##   &lt;chr&gt;        &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 Cambiemos    Male         288 0.581
+## 2 Cambiemos    Female       208 0.419
+## 3 FPV          Male         164 0.453
+## 4 FPV          Female       198 0.547
+## 5 Otros        Male         811 0.443
+## 6 Otros        Female      1019 0.557
+```
+
+---
+## Tablas ponderadas
+
+Grafico simple:
+
+.codefont[
+
+```r
+ggplot(s_vot, aes(x = int_voto_res, y = per, fill = sexo)) +
+  geom_col(alpha = .8) +
+  theme_bw() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom") +
+  labs(title = "Distribución de género según intención de voto",
+       x = "", y = "")
+```
+]
+.center[
+&lt;img src="resultados/plots/svy1.png" width="500px" /&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Crear ponderadores
+
+---
+## Ponderación (raking)
+
+El paquete [anesrake](https://www.rdocumentation.org/packages/anesrake/versions/0.80/topics/anesrake) permite crear ponderadores con el método de raking. Supongamos que queremos crear un nuevo ponderador para sexo y edad.
+
+
+```r
+library(anesrake)
+
+# Supongamos que quiero ponderar por sexo y el parámetro es 
+# 60% mujeres y  40% hombres 
+
+prop.table(table(lat_17$sexo)) # Hay diferencia importante
+```
+
+```
+## 
+##      Male    Female 
+## 0.4791667 0.5208333
+```
+
+```r
+# Creo vector con parametro y nombro los valores
+# Tienen que coincidir con los valores de la variable
+par_sexo &lt;- c(0.6, 0.4) # Es un ejemplo, no son reales
+names(par_sexo) &lt;- c("Female", "Male")
+par_sexo
+```
+
+```
+## Female   Male 
+##    0.6    0.4
+```
+
+---
+
+## Ponderación (raking)
+
+Recodifico variable para ajustar al formato del parámetro poblacional:
+
+
+```r
+# Lo mismo con edad en 3 categorías
+lat_17 &lt;- lat_17 %&gt;% 
+  mutate(edad_rec = case_when(
+    edad &lt;= 39 ~ "18 a 39",
+    edad &gt;= 40 &amp; edad &lt;=59 ~ "40 a 59",
+    edad &gt;= 60 ~ "60 o mas"
+  ))
+
+prop.table(table(lat_17$edad_rec))
+```
+
+```
+## 
+##   18 a 39   40 a 59  60 o mas 
+## 0.4766667 0.3050000 0.2183333
+```
+
+```r
+# Creo vector con parámetro (inventado) también:
+par_edad &lt;- c(0.3, 0.4, 0.3)
+names(par_edad) &lt;- c("18 a 39", "40 a 59", "60 o mas")
+```
+
+
+---
+
+## Ponderación (raking)
+
+Algunos paso previos: crear id para encuestados, chequear que las variables sean factores y que la data sea formato `data.frame` no `tibble`
+
+.codefontchico[
+
+```r
+lat_17 &lt;- mutate(lat_17, id = row_number()) # Crear id
+
+is.factor(lat_17$sexo) # Chequeo que mis variables sean factores
+```
+
+```
+## [1] TRUE
+```
+
+```r
+is.factor(lat_17$edad_rec) 
+```
+
+```
+## [1] FALSE
+```
+
+```r
+lat_17 &lt;- mutate(lat_17, edad_rec = as.factor(edad_rec)) # Transformo edad a factor
+is.factor(lat_17$edad_rec) 
+```
+
+```
+## [1] TRUE
+```
+
+```r
+# IMPORTANTE: La data tiene que estar en formato dataframe no tibble! 
+class(lat_17)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+```r
+lat_17 &lt;- as.data.frame(lat_17)
+class(lat_17)
+```
+
+```
+## [1] "data.frame"
+```
+]
+
+---
+
+## Ponderación (raking)
+
+Ahora ya estamos prontos para ponderar:
+
+
+```r
+parametros &lt;- list(par_sexo, par_edad) # Lista con todos los parametros
+names(parametros) &lt;- c("sexo", "edad_rec") # Nombrar con el nombre exacto de las variables
+
+## Ponderador 
+outsave &lt;- anesrake(
+  parametros, # Lista con parámetros 
+  lat_17, # Data 
+  caseid = lat_17$id, # Id único por caso
+  cap = 5, # Fijo peso máximo de 5
+  type = "nolim",
+  pctlim = 5, # Si la diferencia no es &gt; a 5% no tenga en cuenta la var
+  force1 = TRUE # Asegura que cada parametro sume 1 si hay pequeñas diferencias
+  )
+```
+
+```
+## [1] "Raking converged in 9 iterations"
+```
+
+---
+
+## Ponderación (raking)
+.codefontchico[
+
+```r
+summary(outsave) # Resumen
+```
+
+```
+## $convergence
+## [1] "Complete convergence was achieved after 9 iterations"
+## 
+## $base.weights
+## [1] "No Base Weights Were Used"
+## 
+## $raking.variables
+## [1] "sexo"     "edad_rec"
+## 
+## $weight.summary
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.5194  0.7264  1.0995  1.0000  1.5378  1.5764 
+## 
+## $selection.method
+## [1] "variable selection conducted using _nolim_ - discrepancies selected using _total_."
+## 
+## $general.design.effect
+## [1] 1.156238
+## 
+## $sexo
+##        Target Unweighted N Unweighted % Wtd N Wtd % Change in % Resid. Disc.
+## Male      0.4          575    0.4791667   480   0.4 -0.07916667 5.551115e-17
+## Female    0.6          625    0.5208333   720   0.6  0.07916667 0.000000e+00
+## Total     1.0         1200    1.0000000  1200   1.0  0.15833333 5.551115e-17
+##        Orig. Disc.
+## Male   -0.07916667
+## Female  0.07916667
+## Total   0.15833333
+## 
+## $edad_rec
+##          Target Unweighted N Unweighted % Wtd N Wtd % Change in %  Resid. Disc.
+## 18 a 39     0.3          572    0.4766667   360   0.3 -0.17666667  0.000000e+00
+## 40 a 59     0.4          366    0.3050000   480   0.4  0.09500000 -5.551115e-17
+## 60 o mas    0.3          262    0.2183333   360   0.3  0.08166667  0.000000e+00
+## Total       1.0         1200    1.0000000  1200   1.0  0.35333333  5.551115e-17
+##          Orig. Disc.
+## 18 a 39  -0.17666667
+## 40 a 59   0.09500000
+## 60 o mas  0.08166667
+## Total     0.35333333
+```
+]
+
+---
+
+## Ponderación (raking)
+
+Pego el ponderador como columna del df
+
+.codefont[
+
+```r
+lat_17 &lt;- mutate(lat_17, ponderador = unlist(outsave[1]))
+glimpse(lat_17)
+```
+
+```
+## Rows: 1,200
+## Columns: 11
+## $ idenpa       &lt;fct&gt; Argentina, Argentina, Argentina, Argentina, Argentina, Ar~
+## $ wt           &lt;dbl&gt; 5, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 5, 1, 5, 5, 1, 1, ~
+## $ P16STGBS     &lt;fct&gt; "Don´t know", "Vota nulo/Blanco", "AR:Cambiemos (Alianza ~
+## $ sexo         &lt;fct&gt; Female, Male, Female, Female, Male, Male, Male, Female, M~
+## $ edad         &lt;dbl&gt; 61, 39, 38, 48, 67, 45, 48, 22, 42, 33, 22, 22, 26, 20, 2~
+## $ REEDUC_1     &lt;fct&gt; "Complete primary", "Complete Secondary, technical", "Com~
+## $ int_voto     &lt;chr&gt; "Don´t know", "Vota nulo/Blanco", "AR:Cambiemos (Alianza ~
+## $ int_voto_res &lt;chr&gt; "Otros", "Otros", "Cambiemos", "Cambiemos", "Cambiemos", ~
+## $ edad_rec     &lt;fct&gt; 60 o mas, 18 a 39, 18 a 39, 40 a 59, 60 o mas, 40 a 59, 4~
+## $ id           &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17~
+## $ ponderador   &lt;dbl&gt; 1.5763805, 0.5193543, 0.7263587, 1.5377862, 1.1271289, 1.~
+```
+
+---
+
+## Ponderación (raking)
+
+Chequeo que haya funcionado:
+
+.codefont[
+
+```r
+lat_17 %&gt;% 
+  group_by(sexo) %&gt;% 
+  summarise(sexo = sum(ponderador)) %&gt;% 
+  mutate(sexo = sexo / sum(sexo))
+```
+
+```
+## # A tibble: 2 x 1
+##    sexo
+##   &lt;dbl&gt;
+## 1   0.4
+## 2   0.6
+```
+
+```r
+lat_17 %&gt;% 
+  group_by(edad_rec) %&gt;% 
+  summarise(edad_rec = sum(ponderador)) %&gt;% 
+  mutate(edad_rec = edad_rec / sum(edad_rec))
+```
+
+```
+## # A tibble: 3 x 1
+##   edad_rec
+##      &lt;dbl&gt;
+## 1      0.3
+## 2      0.4
+## 3      0.3
+```
+]
+
+---
+
+## Ponderación (raking)
+
+Comparar intención de voto según ponderación (sin ponderar, ponderador original y ponderador con parámetros falsos como ejemplo)
+
+
+```r
+lat_17 %&gt;% 
+  group_by(int_voto_res) %&gt;% 
+  summarise(cruda = n(),
+            wt = sum(wt),
+            pond = sum(ponderador)) %&gt;% 
+  mutate(cruda = cruda / sum(cruda),
+         wt = wt / sum(wt),
+         pond = pond / sum(pond))  
+```
+
+```
+## # A tibble: 3 x 4
+##   int_voto_res cruda    wt  pond
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Cambiemos    0.198 0.185 0.207
+## 2 FPV          0.14  0.135 0.134
+## 3 Otros        0.662 0.681 0.659
+```
+
+
+---
+class: inverse, center, middle
+
+# survey y srvyr
+
+---
+## Paquete survey
+
+El paquete [survey](https://cran.r-project.org/web/packages/survey/survey.pdf) y [srvyr](https://cran.r-project.org/web/packages/srvyr/vignettes/srvyr-vs-survey.html) su versión con sintaxis similar a dplyr son muy útiles cuando queremos analizar datos de encuestas, permitiendo hacer cálculos teniendo en cuenta diseños complejos.
+
+Con la función `svydesign()` se especifican los ponderadores (de diseño y post-estratificación) y los estratos, luego cuentan con varias funciones que calculan estadísticas descriptivas e inferenciales teniendo en cuenta el diseño de la encuesta ver [survey tutorial](https://stats.idre.ucla.edu/r/seminars/survey-data-analysis-with-r/) y [srvyr tutorial](https://cran.r-project.org/web/packages/srvyr/vignettes/srvyr-vs-survey.html)
+
+
+---
+## Declarar data como encuesta
+
+Primero declaramos dataframe como objeto de encuesta (especificando solo ponderador en este caso).
+
+
+```r
+library(srvyr)
+
+# Declarar como survey object con ponderador
+svy &lt;- lat_17 %&gt;% 
+  as_survey_design(weight = wt)
+
+svy
+```
+
+```
+## Independent Sampling design (with replacement)
+## Called via srvyr
+## Sampling variables:
+##  - ids: `1`
+##  - weights: wt
+## Data variables: idenpa (fct), wt (dbl), P16STGBS (fct), sexo (fct), edad (dbl),
+##   REEDUC_1 (fct), int_voto (chr), int_voto_res (chr), edad_rec (fct), id (int),
+##   ponderador (dbl)
+```
+
+
+---
+
+## Manipulación de objeto tipo survey
+
+El paquete srvyr sigue la lógica del tidyverse, y a sus objetos se le pueden aplicar funciones del dplyr como `mutate()` o `rename()`
+
+.codefont[
+
+```r
+svy &lt;- svy %&gt;% 
+  rename(pais = idenpa)  
+
+svy
+```
+
+```
+## Independent Sampling design (with replacement)
+## Called via srvyr
+## Sampling variables:
+##  - ids: `1`
+##  - weights: wt
+## Data variables: pais (fct), wt (dbl), P16STGBS (fct), sexo (fct), edad (dbl),
+##   REEDUC_1 (fct), int_voto (chr), int_voto_res (chr), edad_rec (fct), id (int),
+##   ponderador (dbl)
+```
+]
+
+---
+
+## Variable numéricas
+
+Podemos usar funciones de srvyr como `survey_mean()` o `survey_total()` dentro de `summarize()` como en dplyr:
+
+.codefont[
+
+```r
+# Media, desvío estandar e intervalo de confianza
+svy %&gt;%
+  srvyr::summarize(media_edad = survey_mean(edad, vartype = c("se", "ci")))
+```
+
+```
+##   media_edad media_edad_se media_edad_low media_edad_upp
+## 1   47.15216      0.650996       45.87494       48.42938
+```
+
+```r
+# Cuantiles
+svy %&gt;%
+  srvyr::summarize(edad_quantil = survey_quantile(edad, c(0.25, 0.5, 0.75)))
+```
+
+```
+##   edad_quantil_q25 edad_quantil_q50 edad_quantil_q75 edad_quantil_q25_se
+## 1               31               46               62            1.019397
+##   edad_quantil_q50_se edad_quantil_q75_se
+## 1            1.274246            1.019397
+```
+]
+
+---
+
+## Variable numéricas
+
+Podemos estimar estas métricas por grupo:
+
+.codefont[
+
+```r
+svy %&gt;%
+  group_by(int_voto_res) %&gt;%
+  srvyr::summarize(id_mean = survey_mean(edad, vartype = c("se", "ci")))
+```
+
+```
+## # A tibble: 3 x 5
+##   int_voto_res id_mean id_mean_se id_mean_low id_mean_upp
+##   &lt;chr&gt;          &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Cambiemos       48.8      1.46         46.0        51.7
+## 2 FPV             45.0      1.79         41.5        48.5
+## 3 Otros           47.1      0.794        45.6        48.7
+```
+]
+
+---
+
+## Variable numéricas
+
+Graficamos con ggplot:
+
+.center[
+&lt;img src="resultados/plots/svy2.png" width="500px" /&gt;
+]
+
+---
+
+## Variable categóricas
+
+Porcentaje, n ponderado y ni sin ponderar
+
+.codefont[
+
+```r
+svy %&gt;%
+  group_by(int_voto_res) %&gt;%
+  srvyr::summarize(porcentaje = survey_mean(),
+                   n_pond = survey_total(),
+                   n_no_pond = unweighted(n()))
+```
+
+```
+## # A tibble: 3 x 6
+##   int_voto_res porcentaje porcentaje_se n_pond n_pond_se n_no_pond
+##   &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;
+## 1 Cambiemos         0.185        0.0135    496      37.2       237
+## 2 FPV               0.135        0.0120    362      33.0       168
+## 3 Otros             0.681        0.0164   1830      60.1       795
+```
+]
+
+---
+
+## Variable categóricas
+
+Porcentaje sobre primer categoría (sexo)
+
+.codefont[
+
+```r
+svy %&gt;%
+  group_by(sexo, int_voto_res) %&gt;%
+  srvyr::summarize(porcentaje = survey_mean(vartype = "ci"))
+```
+
+```
+## # A tibble: 6 x 5
+## # Groups:   sexo [2]
+##   sexo   int_voto_res porcentaje porcentaje_low porcentaje_upp
+##   &lt;fct&gt;  &lt;chr&gt;             &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Male   Cambiemos         0.228         0.185           0.271
+## 2 Male   FPV               0.130         0.0963          0.163
+## 3 Male   Otros             0.642         0.593           0.691
+## 4 Female Cambiemos         0.146         0.114           0.178
+## 5 Female FPV               0.139         0.106           0.172
+## 6 Female Otros             0.715         0.673           0.757
+```
+]
+
+
+---
+
+## Variable categóricas
+
+Graficamos con ggplot:
+
+.center[
+&lt;img src="resultados/plots/svy3.png" width="500px" /&gt;
+]
+
+
+---
+
+## Estadística inferencial
+
+Para estimar modelos de regresión y otras técnicas de estadística inferencial debemos usar el paquete survey, que funciona con la sintaxis de fórmula:
+
+.codefont[
+
+```r
+# Regresión logística
+svy &lt;- svy %&gt;% 
+  mutate(vot_camb = case_when(
+    int_voto_res == "Cambiemos" ~ 1,
+    TRUE ~ 0
+  ))
+
+logit1 &lt;- survey::svyglm(vot_camb ~ sexo + edad, family = quasibinomial, 
+                         design = svy, na.action = na.omit)
+summary(logit1)
+```
+
+```
+## 
+## Call:
+## svyglm(formula = vot_camb ~ sexo + edad, design = svy, family = quasibinomial, 
+##     na.action = na.omit)
+## 
+## Survey design:
+## Called via srvyr
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -1.540364   0.249159  -6.182 8.65e-10 ***
+## sexoFemale  -0.556163   0.180278  -3.085  0.00208 ** 
+## edad         0.006806   0.005012   1.358  0.17476    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for quasibinomial family taken to be 1.003419)
+## 
+## Number of Fisher Scoring iterations: 4
+```
+]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false,
+"incremental": true,
+"df_print": "kable",
+"smaller": true,
+"widescreen": true,
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

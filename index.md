@@ -23,9 +23,12 @@ Esta es la página del curso Introducción a la Programación en R
 - [Solución de ejercicios](/scripts/dia3_ej_sol.R)
 
 
-### Visualización de datos
+### Visualización de datos y estadística inferencial
 - [Presentación](/dia_4.html)
 - [Código de clase](/scripts/dia4_codigo.R)
 - [Ejercicios](/scripts/dia4_ej.R)
 - [Solución de ejercicios](/scripts/dia4_ej_sol.R)
 
+### Encuestas en R
+- [Presentación](/clase_extra_encuestas.html)
+- [Código de clase](/scripts/clase_extra_encuestas.R)
